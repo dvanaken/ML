@@ -1,0 +1,91 @@
+\section*{Problem 3: Implementing Naive Bayes and Logistic Regression [Adona - 50 pts]}
+
+In this question you will code two of the classification algorithms covered in class: \emph{Naive Bayes} and \emph{Logistic Regression}. Remember to follow the detailed coding and submission instructions at the top of this file!
+
+\begin{itemize}
+\item \textbf{Data:} All questions will use the following datastructures:
+\begin{itemize}
+\item $\mathit{XTrain} \in \mathbb{R} ^{n \times f}$ is a matrix of training data, where each row is a training point, and each column is a feature.
+\item $\mathit{XTest} \in \mathbb{R} ^{m \times f}$ is a matrix of test data, where each row is a test point, and each column is a feature.
+\item $\mathit{yTrain} \in \{1,...,c\}^{n \times 1} $ is a vector of training labels
+\item $\mathit{yTest} \in \{1,...,c\}^{m \times 1} $ is a (hidden) vector of test labels. 
+\end{itemize}  
+
+
+\item \textbf{SUBMISSION CHECKLIST}
+\begin{itemize}
+\item Submission executes on our machines in less than 20 minutes.
+\item Submission is smaller than 1MB.
+\item Submission is a \verb#.tar# file.
+\item Submission returns matrices of the \emph{exact} dimension specified.
+\end{itemize}
+\end{itemize}
+
+\newpage
+\subsection*{Logspace Arithmetic [7 pts]}
+
+When working with very small and very large numbers (such as probabilities), it is useful to work in \emph{logspace} to avoid numerical precision issues. In logspace, we keep track of the logs of numbers, instead of the numbers themselves. (We generally use natural logs for this). For example, if $p(x)$ and $p(y)$ are probability values, instead of storing $p(x)$ and $p(y)$ and computing $p(x)*p(y)$, we work in log space by storing $\log p(x), \log p(y), \log [p(x)*p(y)]$, where $\log [p(x)*p(y)]$ is computed as $\log p(x)+\log p(y)$.
+
+The challenge is to add and multiply these numbers \emph{while remaining in logspace}, without exponentiating. Note that if we exponentiate our numbers at any point in the calculation it completely defeats the purpose of working in log space. Hint: Alex Smola has an excellent \href{http://blog.smola.org/post/987977550/log-probabilities-semirings-and-floating-point-numbers}{post} on his blog about this topic.
+\begin{enumerate}
+\item \textbf{Logspace Multiplication [2 pts]}\\
+Complete the function \textsf{logProd(x)} which takes as input a vector of numbers in logspace (i.e., $x_i = \log p_i$), and returns the product of these numbers in logspace -- i.e., \textsf{logProd(x)} $= \log \prod_i p_i$.
+\item \textbf{Logspace Addition [5 pts]}\\
+Complete the function \textsf{logSum(x)} which takes as input a vector of numbers in logspace (i.e., $x_i = \log p_i$), and returns the sum of these numbers in logspace -- i.e., \textsf{logSum(x)} $= \log \sum_i p_i$.
+\end{enumerate}
+
+\subsection*{Naive Bayes [12 pts]}
+The dataset for this question can be downloaded at \url{https://autolab.cs.cmu.edu/10701-f14/attachments/view/230}. This is a real dataset called \emph{Iris} from the \href{http://archive.ics.uci.edu/ml/datasets/iris}{UCI machine learning repository}.
+
+In this question you will implement the Gaussian Naive Bayes Classification algorithm. As a reminder, in the Naive Bayes algorithm we calculate $p(c|f) \propto p(f|c)p(c) = p(c) \prod_i p(f_i|c)$. In Gaussian Naive Bayes we learn a one-dimensional Gaussian for each feature in each class, i.e. $p(f_i|c) = N(f_i; \mu_{i,c},\sigma^2_{i,c})$, where $\mu_{i,c}$ is the mean of feature $f_i$ for those instances in class $c$, and $\sigma^2_{i,c}$ is the variance of feature $f_i$ for instances in class $c$. You can (and should) test your implementation locally using the $\mathit{XTrainIris}$ and $\mathit{yTrainIris}$ data provided.
+\begin{enumerate}
+\item \textbf{Prior [2 pts]}\\
+Complete the function \textsf{[p] = NBprior(yTrain)}. $p$ is a $c \times 1$ vector where $p_i$ is the prior probability of class $i$.
+\item \textbf{Parameter Learning [5 pts]}\\
+Complete the function \textsf{[M,V] = NBparameters(XTrain, yTrain)}. $M$ is an $c \times f$ matrix where $M_{i,j}$ is the conditional mean of feature $j$ given class $i$. $V$ is an $c \times f$ matrix where $V_{i,j}$ is the conditional variance of feature $j$ given class $i$.
+\item \textbf{Naive Bayes Classifier [5 pts]}\\
+Complete the function \textsf{[t] = NBclassify(XTrain, XTest, yTrain)}. $t$ is a $m \times 1$ vector of predicted class values, where $t_i$ is the predicted class for the $i$th row of $\mathit{XTest}$.
+\end{enumerate}
+
+\subsection*{Binary Logistic Regression [17 pts]}
+
+In the following two problems, we will implement Binary and Multi-class Logistic Regression. Although Multi-class LR is a direct generalization of the binary case, the two algorithms are often formalized slightly differently (e.g. the two binary case only has one vector $w \in f \times 1$ while the equivalent "multi-class" binary implementation has a matrix $W in 2 \times f$). The two formulations are equivalent, but each is more natural to manipulate in its specific context. Binary LR is slightly easier to derive and implement, so we will start here. As you progress to Multi-class LR, try to notice the parallels - this will minimize work and maximize intuition :).
+
+\textbf{NOTE:} If you're feeling adventurous, you can instead start by directly implementing multi-class LR. However, you will then have to write a wrapper function for each binary method converting between the two representations (e.g. converting $W$ to $w$). This should be less work if you're experience with ML, but is not recommended if this is your first time implementing these algorithms. \\
+
+The dataset for this question can be downloaded at \url{https://autolab.cs.cmu.edu/10701-f14/attachments/view/230}. This is another real dataset called the \textit{Wisconsin Breast Cancer Database}, also from \href{http://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Original%29}{UCI}. \\
+
+You will train the Logistic Regression Classifier using numerical optimization of the Maximum Likelihood Estimator (MLE). Since we haven't covered numerical optimization techniques in class yet, we have provided you with helper code, implementing a very rudimentary version of gradient descent. Feel free to check it out! 
+
+
+\begin{enumerate}
+\item \textbf{Sigmoid Probability [2 pts]}\\
+Complete the function \textsf{[p] = LRprob(x, w)}. $x$ is a single training example ($1 \times f$), $w$ is a $f \times 1$ weights vector, and $p = p(y|x)$ is a $2 \times 1$ vector of class probabilities.
+
+\item \textbf{Conditional Log Likelihood [5pts]}\\
+Complete the function \textsf{[logl] = LRlogLikelihood(X, y, w)}. $logl$ is the scalar conditional log likelihood of the data, $(y|X)$, under the model with parameters $w$.
+
+\item \textbf{Gradient of the Conditional Log Likelihood [5pts]}\\
+Complete the function \textsf{[grad] = LRgradient(X, y, w)}. $grad$ is a $f \times 1$ vector representing the gradient of the conditional log likelihood with respect to $w$. 
+
+\item \textbf{Logistic Regression Classifier [5pts]}\\
+Complete the function \textsf{[cls] = LRclassify(XTrain, yTrain, XTest)}. $cls$ is a $m \times 1$ vector representing the predicted test class labels. 
+\end{enumerate}
+
+\subsection*{Multiclass Logistic Regression [14 pts]}
+To test the MultiClass LR Classifier we will again use the \textit{Iris} dataset we used for Naive Bayes above. As always, you can and should test your implementation locally using $XTrainIris$ and $YTrainIris$ data provided. 
+
+\begin{enumerate}
+\item \textbf{Probability [2 pts]}\\
+Complete the function \textsf{[p] = mLRprob(x, W)}. $x$ is a single training example ($1 \times f$), $W$ is a $c \times f$ weights \textit{matrix} where each row $c$ is the weights vector $w_c$, and $p = p(y|x)$ is a $c \times 1$ vector of class probabilities.
+
+\item \textbf{Conditional Log Likelihood [4pts]}\\
+Complete the function \textsf{[logl] = mLRlogLikelihood(X, y, W)}. As before, $logl$ is the scalar conditional log likelihood of the data, $(y|X)$, under the model with parameters $W$.
+
+\item \textbf{Gradient of the Conditional Log Likelihood [4pts]}\\
+Complete the function \textsf{[grad] = mLRgradient(X, y, W)}. $grad$ is a $c \times f$ \textit{matrix} representing the gradient of the conditional log likelihood with respect to $W$. 
+
+\item \textbf{Logistic Regression Classifier [4pts]}\\
+Complete the function \textsf{[cls] = mLRclassify(XTrain, yTrain, XTest)}. As before, $cls$ is a $m \times 1$ vector representing the predicted test class labels. 
+\end{enumerate}
+

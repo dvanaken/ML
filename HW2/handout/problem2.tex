@@ -1,0 +1,34 @@
+\section*{Problem 2: Multi-class Logistic Regression [Anthony - 40 pts]}
+
+
+In class we learned about binary logistic regression. In this problem we consider the more general case where we have more than two classes. Let us denote the number of classes by $C$. Then, the conditional probability of the output class being $c$, given the input data point $\boldsymbol{x}$ is given by the following expression:
+\begin{equation*}
+	P(y=c\mid\boldsymbol{x},\text{W})=\frac{e^{\boldsymbol{w}_c^\top\boldsymbol{x}}}{\sum_{c'=1}^C{e^{\boldsymbol{w}_{c'}^\top\boldsymbol{x}}}},
+\end{equation*}
+where $c\in\{1,\hdots,C\}$ and where $\text{W}$ is a matrix whose rows are the weight vectors of each class, $\boldsymbol{w}_c$ for $c\in\{1,\hdots,C\}$. During the training phase of the algorithm we are given a set of $n$ input-output pairs, $\{\langle\boldsymbol{x}_i,y_i\rangle\}_{i=1}^n$ and we want to {\em learn} the values of the weight vectors for each class that maximize the conditional likelihood of the output labels, $\{y_i\}_{i=1}^n$, given the input data $\{\boldsymbol{x}_i\}_{i=1}^n$ and those weights, $\text{W}$. That is, we want to solve the following optimization problem:
+\begin{equation*}
+	\text{W}^*=\argmax_{\text{W}}{\prod_{i=1}^n{P(y_i\mid\boldsymbol{x}_i,\text{W})}}.
+\end{equation*}
+Note here that we use a product over all training data points and not a joint probability because we assume that those data points are {\em independent and identically distributed (i.i.d.)}.
+
+\begin{enumerate}
+	\item When we actually implement this algorithm, instead of maximizing the conditional likelihood of the training data, we choose to maximize the log of that quantity, namely the conditional log-likelihood.
+	\begin{enumerate}
+		\item Provide two (2) potential reasons why we might want to do that.
+		{\bf [5 pts]}
+		\item Explain why the solution we obtain by maximizing the log of a function is the same as the solution we obtain by maximizing the function itself.
+		{\bf [5 pts]}
+	\end{enumerate}
+	
+	\item In order to solve the optimization problem of the training phase we need to use some numerical solver. Most solvers require that we provide a function that computes the objective function value given some weights (i.e. the quantity within the ``arg max'' operator) and the gradient of that objective function (i.e. its first derivatives) and they take care of solving the problem for us. Some solvers usually also require the Hessian of the objective function (i.e. its second derivatives). So, in order to implement the algorithm we need to derive those functions.
+	\begin{enumerate}
+		\item Derive the conditional log-likelihood function for the multi-class logistic regression model. You may call that function $l(\text{W})$.
+		{\bf [10 pts]}
+		\item Derive the gradient of that function with respect to the weight vector of class $c$. That is, derive the value of $\nabla_{\boldsymbol{w}_c}l(\text{W})$. You may call the gradient $\boldsymbol{g}_c(\text{W})$.
+		{\bf [10 pts]}\\
+		{\small \underline{Note:} The gradient of a function $f(\boldsymbol{x})$ with respect to vector $\boldsymbol{x}$ is itself a vector, whose $i$\textsuperscript{th} entry is defined as $\frac{\partial f(\boldsymbol{x})}{\partial x_i}$, where $x_i$ is the $i$\textsuperscript{th} element of vector $\boldsymbol{x}$.}
+		\item Derive the Hessian sub-matrix of that function with respect to the weight vector of class $c$ and the weight vector of class $c'$. You may call this sub-matrix $\text{H}_{c,c'}(\text{W})$.
+		{\bf [10 pts]}\\
+		{\small \underline{Note:} The Hessian of a function $f(\boldsymbol{x})$ with respect to vector $\boldsymbol{x}$ is a matrix, whose $\{i,j\}$\textsuperscript{th} entry is defined as $\frac{\partial^2 f(\boldsymbol{x})}{\partial x_i\partial x_j}$. In this case, we are asking for a sub-matrix of the Hessian of the conditional log-likelihood function, taken with respect to weight vectors of only two classes. The $\{i,j\}$\textsuperscript{th} entry of the sub-matrix you need to derive is defined as $\frac{\partial^2 l(\text{W})}{\partial {w_c}_i\partial {w_{c'}}_j}$.} \\\\
+	\end{enumerate}
+\end{enumerate}

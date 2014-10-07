@@ -1,0 +1,89 @@
+\documentclass{article}
+
+\usepackage{hw}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{multicol}
+\usepackage{paralist}
+\usepackage{todonotes}
+\setlength{\marginparwidth}{2.15cm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+% Some commands to allow solutions to be embedded in the assignment file.
+\ifcsname issoln\endcsname \else \def\issoln{0} \fi
+\newcommand{\soln}[1]
+{
+  \if\issoln 1
+  \textbf{Solution:}
+  #1
+  \fi
+}
+
+\begin{document}
+
+\section*{}
+\begin{center}
+  \centerline{\textsc{\LARGE Homework 2{\if\issoln 1 Solutions \else \fi}}}
+  \vspace{0.5em}
+  \centerline{\textsc{\Large Kernel SVM and Perceptron}}
+  \vspace{1em}
+  \textsc{\large Dana Van Aken} \\
+\end{center}
+
+\section*{Problem 2: Understanding the Likelihood Function, Bit by Bit}
+\begin{enumerate}
+	\item
+	\begin{enumerate}
+		\item $H_{i}\sim{}Bernoulli(p_{H}), N_{H}\sim{}Binomial(N_{bits}, p_{H})$.
+		\item
+		\begin{enumerate}
+			\item 
+			$\text{L}(H_{1},		\text{...},H_{Nbits};p_{H})=\prod_{i=1}^{N_{bits}}P(H_{i};p_{H})=\prod_{i=1}^{N_{H}}p_{H}\prod_{i=1}^{N_{bits}-N_{H}}(1-p_{H})=p_H^{N_{H}}(1-p_{H})^{N_{bits}-N_{H}}$.
+			\item %TODO!!!
+			\item
+			$\text{[000]: }\int\limits_0^1p_H^0(1-p_H)^3dp_H=\int\limits_0^1(1-p_H)^3dp_H=\left.(-1)\frac{1}{4}(1-p_H)^4\right|_0^1=\frac{-1}{4}\big((1-1)^4-(1-0)^4\big)=\frac{1}{4}$\\
+			$\text{[111]: }\int\limits_0^1p_H^3(1-p_H)^0dp_H=\int\limits_0^1p_H^3dp_H=\left.\frac{1}{4}p_H^4\right|_0^1=\frac{1}{4}(1^4-0^4)=\frac{1}{4}$\\
+			$\text{[110]: }\int\limits_0^1p_H^2(1-p_H)^1dp_H=\int\limits_0^1(p_H^2-p_H^3)dp_H=\left.(\frac{1}{3}p_H^3-\frac{1}{4}p_H^4)\right|_0^1=\frac{1}{3}-\frac{1}{4}=\frac{1}{12}$\\
+			$\text{[001]: }\int\limits_0^1p_H^1(1-p_H)^2dp_H=\int\limits_0^1p_H(1-p_H^2)dp_H=\int\limits_0^1p_H(1-2p_H+p_H^2)dp_H\\=\int\limits_0^1(p_H-2p_H^2+p_H^3)dp_H=\left.(\frac{1}{2}p_H^2-\frac{2}{3}p_H^3+\frac{1}{4}p_H^4)\right|_0^1=\frac{1}{2}-\frac{2}{3}+\frac{1}{4}=\frac{1}{12}$\vspace{0.5em}\\
+			You can tell that this is not a valid probability distribution over $p_H$ because the total sum of the area under these curves is not equal to 1. The reason that it's invalid is because these 4 sequences are only a subset of the total possible sequences, (for example, we are missing [101], [100], etc.). 
+		\end{enumerate}
+		\item We choose $p_H$ that maximizes the probability of the observed sequence. We find this value of $p_H$ by maximizing the likelihood function.
+		\vspace{0.5em}\\
+		$\hat{p}_H=\underset{p_H}{\mathrm{\text{arg max}}}P(H_1,\text{...},H_{N_{bits}};p_H)=\underset{p_H}{\mathrm{\text{arg max}}}\big(p_H^{N_H}(1-p_H)^{N_{bits}-N_H}\big)$
+		\vspace{0.5em}\\
+		There are different techniques that can be used to find the value of $p_H$ that maximizes the likelihood function (e.g. taking the derivative, gradient descent). To find this maximizing value, we can take the derivative of this likelihood function, set it equal to 0, and solve for $p_H$ since a closed-form solution exists for this particular likelihood function.
+		\vspace{0.5em}\\
+		Instead of maximizing the likelihood function, we will instead maximize the log-likelihood function which reaches its maximum value at the same points as the original function, (this is because the logaritm function is monotonically increasing).
+		\vspace{0.5em}\\
+		$\hat{p}_H=\underset{p_H}{\mathrm{\text{arg max  }}}log\big(P(H_1,\text{...},H_{N_{bits}};p_H)\big)=\underset{p_H}{\mathrm{\text{arg max  }}}log\big(\big(p_H^{N_H}(1-p_H)^{N_{bits}-N_H}\big)\big)\\=\underset{p_H}{\mathrm{\text{arg max  }}}log(p_H^{N_H})+log(1-p_H)^{N_{bits}-N_H}=\underset{p_H}{\mathrm{\text{arg max  }}}N_Hlog(p_H)+(N_{bits}-N_H)log(1-p_H)$
+		\vspace{1.0em}\\
+		Now take the derivative of the log-likelihood function:
+		\vspace{1.0em}\\
+		$\frac{d}{dp_H}\big(N_Hlog(p_H)+(N_{bits}-N_H)log(1-p_H)\big)=\frac{N_H}{p_H}-\frac{N_{bits}-N_H}{1-p_H}$
+		\vspace{1.0em}\\
+		Set it equal to 0 and solve for $p_H$:
+		\vspace{1.0em}\\
+		$\frac{N_H}{p_H}-\frac{N_{bits}-N_H}{1-p_H}=0$\\
+		\vspace{0.5em}\\
+		$\frac{N_H}{p_H}=\frac{N_{bits}-N_H}{1-p_H}$\\
+		\vspace{0.5em}\\
+		$\frac{N_H(1-p_H)}{p_H}=N_{bits}-N_H$\\
+		\vspace{0.5em}\\
+		$\frac{1-p_H}{p_H}=\frac{N_{bits}-N_H}{N_H}$\\
+		\vspace{0.5em}\\
+		$\frac{1}{p_H}-1=\frac{N_{bits}}{N_H}-1$\\
+		\vspace{0.5em}\\
+		$p_H=\frac{N_H}{N_{bits}}$
+		\vspace{1.0em}\\
+		This result shows that the maximizing value of $p_H$ is the number of heads (or 1-bits) divided by the total number of flips (or bits).
+	\end{enumerate}
+	\item
+\end{enumerate}
+
+\end{document}
