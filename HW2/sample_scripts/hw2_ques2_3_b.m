@@ -30,7 +30,8 @@ for i=1:nTrials
     sigma_squared = zeros(1, nBits);
     for j=1:nBits
         sigma_squared(1, j) = j / nBits;
-        samps(1,j) = (rand(1, 1) > 0.4) + normrnd(0, sqrt(sigma_squared(1,j)));
+        %samps(1,j) = (rand(1, 1) > 0.4) + normrnd(0, sqrt(sigma_squared(1,j)));
+        samps(1,j) = binornd(1, 0.6) + normrnd(0, sqrt(sigma_squared(1,j)));
     end
     max_LL = -inf;
     max_LL_ind = 1;

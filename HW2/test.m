@@ -34,12 +34,12 @@ for i=1:nTrials
     max_LL_ind = 1;
     for j=1:nPhSamples
         ph = .01*(j-1);
-        res = 1;
+        res = 0;
         for k=1:nBits
             samp = samps(1,k);
             beta = const * exp(-(samp-1)^2/(2 * sigma_squared));
             alpha = const * exp(-(samp)^2/(2 * sigma_squared));
-            res = res * (ph * (beta - alpha) + alpha);
+            res = res + log(ph * (beta - alpha) + alpha);
         end
         L(i,j) = res;
         if res > max_LL

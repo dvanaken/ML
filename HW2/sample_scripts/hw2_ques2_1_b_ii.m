@@ -29,7 +29,7 @@ for i=1:numSeqs,
     max_L_indsi = 1;
     for j=1:numP_H,
         pH = p_H(j);
-        L(i,j) = nchoosek(N_bits,heads)*pH^heads*(1-pH)^(N_bits-heads); % Binomial
+        L(i,j) = pH^heads*(1-pH)^(N_bits-heads); % Binomial
         % L(i,j) = pH^heads*(1-pH)^(N_bits-heads); % Binomial
         sum = sum + L(i,j)*0.01;
         if L(i,j) > max_Li,
