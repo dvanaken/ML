@@ -8,7 +8,7 @@
 clear all;
 
 p_H_star = 0.6; % the value of the true parameter
-sigma_squared = 0.1;  % the variance of the noise term, epsilon_i
+sigma_squared = .1;  % the variance of the noise term, epsilon_i
 p_H = 0:0.01:1; % sample p_H
 N_bits = [100 500 1000 2500]; % trial size varies
 nTrials = length(N_bits);
@@ -64,7 +64,6 @@ for isize = 1:length(N_bits)
     plot(p_H(max_L_inds(isize)), max_L(isize), '*', 'MarkerEdgeColor', colors{isize});
     
 end
-
 xlabel('p_H');
 ylabel('likelihood');
 title('2.2.c: blue: 100 trials, green: 500, red: 1000, black: 2500');

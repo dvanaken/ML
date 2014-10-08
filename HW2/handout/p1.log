@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.9.24)  7 OCT 2014 23:17
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.9.24)  8 OCT 2014 01:44
 entering extended mode
  %&-line parsing enabled.
-**p2.tex
-(./p2.tex
+**p1.tex
+(./p1.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
 yphenation, farsi, arabic, croatian, bulgarian, ukrainian, russian, czech, slov
@@ -724,8 +724,8 @@ Package: enumitem 2009/05/18 v2.2 Customized lists
 \labelindent=\skip57
 \enit@outerparindent=\dimen221
 \enitdp@desc=\count158
-) (./p2.aux)
-\openout1 = `p2.aux'.
+) (./p1.aux)
+\openout1 = `p1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
 LaTeX Font Info:    ... okay on input line 29.
@@ -766,10 +766,10 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 LaTeX Info: Redefining \ref on input line 29.
 LaTeX Info: Redefining \pageref on input line 29.
- (./p2.out)
-(./p2.out)
+ (./p1.out)
+(./p1.out)
 \@outlinefile=\write5
-\openout5 = `p2.out'.
+\openout5 = `p1.out'.
 
 \AtBeginShipoutBox=\box68
 
@@ -825,106 +825,28 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 44.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-Overfull \hbox (13.22292pt too wide) in paragraph at lines 48--49
-[]$[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 H[]; []; H[]\OT1/cmr/m/n/10 ; \OML/cmm/m
-/it/10 p[]\OT1/cmr/m/n/10 ) = [][] \OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/
-m/it/10 H[]\OT1/cmr/m/n/10 ; \OML/cmm/m/it/10 p[]\OT1/cmr/m/n/10 ) = [][] \OML/
-cmm/m/it/10 p[] [][]\OT1/cmr/m/n/10 (1 \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 p[
-]\OT1/cmr/m/n/10 ) = \OML/cmm/m/it/10 p[]\OT1/cmr/m/n/10 (1 \OMS/cmsy/m/n/10 ^^
-@ \OML/cmm/m/it/10 p[]\OT1/cmr/m/n/10 )[]$. 
- []
+<../hw2_ques1_2_ab.jpg, id=6, 4143.48pt x 2330.7075pt>
+File: ../hw2_ques1_2_ab.jpg Graphic file (type jpg)
 
-<../hw2_ques2_1_b_ii.jpg, id=6, 562.1pt x 421.575pt>
-File: ../hw2_ques2_1_b_ii.jpg Graphic file (type jpg)
+<use ../hw2_ques1_2_ab.jpg> [1
 
-<use ../hw2_ques2_1_b_ii.jpg>
-Underfull \hbox (badness 10000) in paragraph at lines 51--52
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 49--57
-
- []
-
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../hw2_ques2_1_b_ii.jpg>]
-Overfull \hbox (20.55138pt too wide) in paragraph at lines 96--131
-\OT1/cmr/m/n/10 Concavity is im-por-tant be-cause it means there ex-ists a valu
-e of some vari-able that min-i-mizes/maximizes
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 96--131
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 131--134
-
- []
-
-<../hw2_ques2_2_c.jpg, id=37, 552.0625pt x 391.4625pt>
-File: ../hw2_ques2_2_c.jpg Graphic file (type jpg)
-
-<use ../hw2_ques2_2_c.jpg>
-Underfull \hbox (badness 10000) in paragraph at lines 134--141
-
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../hw2_ques2_2_d.jpg, id=38, 562.1pt x 421.575pt>
-File: ../hw2_ques2_2_d.jpg Graphic file (type jpg)
- <use ../hw2_ques2_2_d.jpg>
-Underfull \hbox (badness 10000) in paragraph at lines 141--148
-
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<../hw2_ques2_3_b.jpg, id=39, 562.1pt x 421.575pt>
-File: ../hw2_ques2_3_b.jpg Graphic file (type jpg)
- <use ../hw2_ques2_3_b.jpg>
-<../hw2_ques2_3_c.jpg, id=40, 562.1pt x 421.575pt>
-File: ../hw2_ques2_3_c.jpg Graphic file (type jpg)
- <use ../hw2_ques2_3_c.jpg>
-[3]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[4 <../hw2_ques2_2_c.jpg>] [5 <../hw2_ques2_2_d.jpg> <../hw2_ques2_3_b.jpg>]
-[6 <../hw2_ques2_3_c.jpg>] (./p2.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../hw2_ques1_2_ab.jpg>] [2
+] (./p1.aux) ) 
 Here is how much of TeX's memory you used:
- 16887 strings out of 493848
- 282043 string characters out of 1152823
- 399098 words of memory out of 3000000
- 19766 multiletter control sequences out of 15000+50000
- 13254 words of font info for 52 fonts, out of 3000000 for 9000
+ 16847 strings out of 493848
+ 281351 string characters out of 1152823
+ 382097 words of memory out of 3000000
+ 19740 multiletter control sequences out of 15000+50000
+ 11048 words of font info for 44 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 63i,8n,57p,511b,704s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/pu
-blic/amsfonts/cm/cmbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex
-10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/p
-ublic/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr5.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/shar
-e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-tex
-live/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/t
-ype1/public/amsfonts/cm/cmti10.pfb>
-Output written on p2.pdf (6 pages, 274472 bytes).
+ 63i,7n,57p,449b,570s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.p
+fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on p1.pdf (2 pages, 2570759 bytes).
 PDF statistics:
- 115 PDF objects out of 1000 (max. 8388607)
- 23 named destinations out of 1000 (max. 500000)
- 38 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 50 PDF objects out of 1000 (max. 8388607)
+ 15 named destinations out of 1000 (max. 500000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
