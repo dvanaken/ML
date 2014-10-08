@@ -5,7 +5,7 @@
 clear all;
 
 p_H_star = 0.6; % the value of the true parameter
-sigma_squared = 1;  % the variance of epsilon
+sigma_squared = 10;  % the variance of epsilon
 p_H = 0:0.01:1; % sample p_H
 nPhSamps = length(p_H);
 N_bits = [100 500 1000 2500]; %100 250 500 1000]; % trial size varies

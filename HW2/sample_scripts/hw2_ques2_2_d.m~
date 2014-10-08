@@ -29,10 +29,12 @@ sigma = sqrt(sigma_squared);
 const = 1 / (sigma * sqrt(2 * pi));
 for i=1:nTrials
     nBits = N_bits(i);
-    samps = (rand(1, nBits) > 0.4) + normrnd(0, sigma, [1 nBits]);
+    %samps = (rand(1, nBits) > 0.4) + normrnd(0, sigma, [1 nBits]);
+    samps = (binornd(1, 0.6, 1, nBits)) + normrnd(0, sigma, [1 nBits]);
+    p_H_bar(1,i) = sum(samps > 0.5) / nBits;
     max_LL = -inf;
     max_LL_ind = 1;
-    for j=1:nPhSamples
+    for j=1:nPhSamps
         ph = .01*(j-1);
         res = 0;
         for k=1:nBits
@@ -45,7 +47,7 @@ for i=1:nTrials
         if res > max_LL
            max_LL = res;
            max_LL_ind = j;
-           p_
+           p_H_hat(1,i) = ph;
         end
     end
     max_L(i,1) = max_LL;
