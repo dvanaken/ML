@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{multicol}
+\usepackage{paralist}
+\usepackage{todonotes}
+\setlength{\marginparwidth}{2.15cm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\graphicspath{{../}}
+\usepackage{setspace}
+\doublespacing
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\begin{document}
+
+\section*{}
+\begin{center}
+  \centerline{\textsc{\LARGE Homework 3}}
+  \vspace{0.5em}
+  \centerline{\textsc{Regression, Gaussian Processes, and Boosting}}
+  \vspace{1em}
+  \textsc{\large Dana Van Aken} \\
+\end{center}
+
+\section*{Problem 1: Gaussian Processes}
+
+\begin{enumerate}[label=(\alph*)]
+\setlength\itemsep{1em}
+
+\item % (a)
+
+\item % (b)
+
+\item % (c)
+
+\item % (d)
+
+\item % (e)
+
+\item % (f)
+
+\end{enumerate}
+
+\section*{Problem 2: Regression}
+
+\subsection*{2.1 Why Lasso Works}
+
+\begin{enumerate}
+\setlength\itemsep{1em}
+
+\item Write $J_\lambda(\beta)$ in the form $J_\lambda(\beta)=g(y)+\sum_1^df(X_i,y,\beta_i,\lambda)$, $\lambda > 0$: 
+
+$J_\lambda(\beta)=\frac{1}{2}\norm{y-X\beta}^2+\lambda\norm{\beta}$ 
+
+$=\frac{1}{2}(y-X\beta)^T(y-X\beta)+\lambda\norm{\beta}$ 
+
+$=\frac{1}{2}[y^Ty-2y^TX\beta+(X\beta)^TX\beta]+\lambda\norm{\beta}$ 
+
+$=\frac{1}{2}[y^Ty-2y^TX\beta+\beta^TX^TX\beta]+\lambda\norm{\beta}$ 
+
+$=\frac{1}{2}[y^Ty-2y^TX\beta+\beta^T\beta]+\lambda\norm{\beta}$ \hfill $(X^TX=I)$ 
+
+$=\frac{1}{2}y^Ty-y^TX\beta+\frac{1}{2}\beta^T\beta+\lambda\norm{\beta}$ 
+
+$=\frac{1}{2}y^Ty+\sum_{i=1}^d\frac{1}{2}\beta_i^T\beta_i-y^TX_i\beta_i+\lambda\norm{\beta_i}$ 
+
+Let $g(y)=\frac{1}{2}y^Ty$ and $f(X_i,y,\beta_i,\lambda)=\frac{1}{2}\beta_i^T\beta_i-y^TX_i\beta_i+\lambda\norm{\beta_i}$, then: 
+
+$\bm{J_\lambda(\beta)=g(y)+\sum_{i=1}^df(X_i,y,\beta_i,\lambda)}$ 
+
+
+
+\item $\beta_i^\ast>0$:
+
+Calculating the derivative of $f(X_i,y,\beta_i^\ast,\lambda)$, (where $i$ in $\{1...d\}$), we get: 
+
+$\frac{f(X_i,y,\beta_i^\ast,\lambda)}{d\beta_i^\ast}=\beta_i^\ast-y^TX_i+\lambda$
+
+Setting the LHS equal to zero and solving for $\beta_i^\ast$ gives:
+
+\begin{equation}
+\bm{\beta_i^\ast=y^TX_i-\lambda}
+\end{equation}
+
+
+\item $\beta_i^\ast<0$:
+
+Calculating the derivative of $f(X_i,y,\beta_i^\ast,\lambda)$, (where $i$ in $\{1...d\}$), we get: 
+
+$\frac{f(X_i,y,\beta_i^\ast,\lambda)}{d\beta_i^\ast}=-\beta_i^\ast-y^TX_i+\lambda$
+
+Setting the LHS equal to zero and solving for $\beta_i^\ast$ gives:
+
+\begin{equation}
+\bm{\beta_i^\ast=-y^TX_i+\lambda}
+\end{equation}
+
+\item % (4)
+
+In both equations (1) and (2), as we increase $\lambda$, $\beta_i^\ast$ gets closer and closer to zero
+(assuming $\beta_i^\ast$ and $y^TX_i$ are the same sign).
+Once you increase $\lambda$ enough that $\beta_i^\ast$ reaches zero, it sticks there because moving it below zero
+increases the L1 penalty and moves it further away from the least squares term (mathematically, $\lambda$ switches
+its sign at this point because of the characteristics of the absolute value function). 
+
+\item % (5)
+
+Calculating the derivative of $f(X_i,y,\beta_i^\ast,\lambda)$, (where $i$ in $\{1...d\}$),
+with the regularization term $\frac{1}{2}\norm{\beta_i^\ast}_2^2$ we get: 
+
+$\frac{f(X_i,y,\beta_i^\ast,\lambda)}{d\beta_i^\ast}=\beta_i^\ast-y^TX_i+\lambda\beta_i^\ast$
+
+Setting the LHS equal to zero and solving for $\beta_i^\ast$ gives:
+
+$\beta_i^\ast=\frac{y^TX_i}{1+\lambda}$
+
+Unlike equations (1) and (2), there is no value of alpha that can drive $\beta_i^\ast$ to zero.
+This demonstrates why Lasso regression often results in ``sparser" solutions whereas Ridge regression
+does not.
+
+\end{enumerate}
+\subsection*{2.2 Bayesian regression and Gaussian process}
+
+\begin{enumerate}
+\setlength\itemsep{1em}
+
+\item % (1)
+
+\begin{enumerate}
+
+\item % (a)
+
+\item % (b)
+
+\end{enumerate}
+
+\item % (2)
+
+\item % (3)
+
+\item % (4)
+
+\end{enumerate}
+\end{document}

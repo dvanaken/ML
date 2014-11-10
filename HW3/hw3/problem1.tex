@@ -1,6 +1,4 @@
 \documentclass{article}
-
-\usepackage{hw}
 \usepackage{bm}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -15,6 +13,10 @@
 \usepackage{booktabs}
 \usepackage{enumitem}
 \graphicspath{{../}}
+\usepackage{setspace}
+\doublespacing
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 
 \begin{document}
 
@@ -30,6 +32,7 @@
 \section*{Problem 1: Gaussian Processes}
 
 \begin{enumerate}[label=(\alph*)]
+\setlength\itemsep{1em}
 
 \item % (a)
 
@@ -50,8 +53,15 @@
 \subsection*{2.1 Why Lasso Works}
 
 \begin{enumerate}
+\setlength\itemsep{1em}
 
-\item % (1)
+\item Write $J_\lambda(\beta)$ in the form $J_\lambda(\beta)=g(y)+\sum_1^df(X_i,y,\beta_i,\lambda)$, $\lambda > 0$: \\
+$J_\lambda(\beta)=\frac{1}{2}\norm{y-X\beta}^2+\lambda\norm{\beta}$ \\
+$=\frac{1}{2}(y-X\beta)^T(y-X\beta)+\lambda\norm{\beta}$ \\
+$=\frac{1}{2}[\norm{y}^2-2y^TX\beta+(X\beta)^TX\beta]+\lambda\norm{\beta}$ \\
+$=\frac{1}{2}[\norm{y}^2-2y^TX\beta+\beta^TX^TX\beta]+\lambda\norm{\beta}$ \\
+$=\frac{1}{2}[\norm{y}^2-2y^TX\beta+\beta^T\beta]+\lambda\norm{\beta}$ \hfill $(X^TX=I)$ \\
+$=\frac{1}{2}\norm{y}^2-y^TX\beta+\frac{1}{2}\norm{\beta}^2+\lambda\norm{\beta}$
 
 \item % (2)
 
@@ -65,6 +75,7 @@
 \subsection*{2.2 Bayesian regression and Gaussian process}
 
 \begin{enumerate}
+\setlength\itemsep{1em}
 
 \item % (1)
 
