@@ -45,9 +45,9 @@
 
 So far, we have seen two kinds of graphical models: Bayes nets and a constraint satisfaction problem.
 % where we had small logical expressions that connected boolean variables.
-Factor graphs are another kind of a graphical model. Similar to Bayes Nets, a factor graph can represent any distribution; however, some distributions are represented by small factor graphs
+Factor graphs are another kind of a graphical model. Similar to Bayes Nets, a factor graph can represent any distribution, however, some distributions are represented by small factor graphs
 (i.e., ones with few edges and nodes) while other distributions are represented by large factor graphs (i.e., ones with many edges and nodes).
-Another commonality between Bayes nets and factor graphs is that both are defined by a structure and a set of parameters. 
+Since a factor graph is graphical model, it is defined by a structure and a set of parameters. 
 \begin{figure}[h]
 \caption{}
 \label{fig:f1}
@@ -98,10 +98,10 @@ For example, the neighbors of the $f$ node in figure~\ref{fig:f1}(c) are \textit
 and thus the node potential of $f$ is a function of  \textit{age}, \textit{male}, and \textit{salary}.
 
 The tables (a) and (b) in figure~\ref{fig:f1} represent possible functions for potentials $f$ and $g$, respectively. 
-We do this by adding a tuple to our table for each of the possible values that the arguments can take
-for each combination of argument values.
+We can represent a potential using a table as long as the arguments are discrete.
+To do this, we add a tuple to our table for each of the possible values that the arguments can take.
 The tuples determine the value of $f$ for a specific set of argument values.
-For example, to determine the value of function $f$ for $age=T$ (i.e,. older), $male=F$ (i.e., female), and $salary=F$ (i.e., low salary), we can look up these argument values in table~\ref{fig:f1}(a) and see that the $f$ has the value 1.
+For example, to determine the value of function $f$ for $age=T$ (i.e., older), $male=F$ (i.e., female), and $salary=F$ (i.e., low salary), we can look up these argument values in table~\ref{fig:f1}(a) and see that the $f$ has the value 1.
 
 \subsection{Probabilities}
 The structure and parameters determine the probability distribution. The overall probability can be found by multiplying together all of the factors and then dividing by a normalizing constant:
@@ -110,7 +110,7 @@ P(x)=\frac{1}{Z}\prod_{factors\,k}\Phi_k(x_{arg(k)})
 \end{equation*}
 where $\Phi_k$ is the factor, $X_{arg(k)}$ are the argument values of the factors (i.e., the values of the factor's neighbors in the graph), and $Z$ is the normalizing constant.
 
-For example, the probability of figure~\ref{fig:f1}(c) is:
+For example, the probability of figure~\ref{fig:f1}(c) can be written as:
 \begin{equation*}
 \begin{split}
 P(x) & =\frac{1}{Z}\prod_{i\epsilon\{f,g\}}\Phi_i(x_{arg(i)}) \\
@@ -119,7 +119,7 @@ P(x) & =\frac{1}{Z}\prod_{i\epsilon\{f,g\}}\Phi_i(x_{arg(i)}) \\
 \end{split}
 \end{equation*}
 
-Note that Bayes nets equation does not have a normalizing constant, $Z$.
+Note that Bayes net equation does not have a normalizing constant, $Z$.
 The addition of $Z$ results in a number of differences between factor graphs and Bayes nets.
 One example of a difference is that $Z$ increases the computational complexity.
 In general, computing $Z$ is non-trivial and takes exponential time because it is equal to the sum 
@@ -136,7 +136,7 @@ Later, we will study more efficient ways to compute $Z$ that work for certain ca
 
 Another type of graphical model is a Markov random field (MRF).
 Again, graphical models are given by a structure and a set of parameters.
-The structure in a MRF is simply an undirected graph, (note that this graphical model can have cycles).
+The structure in a MRF is simply an undirected graph, (note that this particular graphical model can have cycles).
 
 A clique in a graph is a set of nodes that are connected in all possible ways with one another 
 (e.g., a three-clique is a triangle, a four-clique is a square with a cross in the center).
@@ -145,6 +145,9 @@ For every clique, there is a factor (or potential), just like the factor in a fa
 In fact, we can think of the MRF being an alternate notation for a factor graph 
 with the exception that
  instead of having a clique in a factor graph, you have an explicit notation for where all of the factors are.
+
+Figure~\ref{fig:f3} shows the factor graph from figure~\ref{fig:f1}(c) drawn as a MRF.
+This graph is created by replacing factors $f$ and $g$ with 3-cliques.
 
 \section{Factor Graphs and MRF: Testing for Conditional Independence}
 Like Bayes nets, factor graphs and MRFs can also be tested for conditional independence.
@@ -171,19 +174,20 @@ Since there is no path between $age$ and $repay$, it is true that $age$ is indep
 After removing $repay$ and it's outgoing edges from the graph, there is still a path from $age$ to $other$,
 so $age$ is not independent of $other$ given $repay$.
 
-FIGURES XXX and~\ref{fig:f1}(c) show a Bayes net and a factor graph that represent the same probability distribution.
+FIGURES XXX and~\ref{fig:f1}(c) show the same probability distribution represented by a Bayes net and a factor graph, respectively.
 If we ask whether age and male are independent in the Bayes net representation,
 d-separation will determine that they are independent since there is no active path between them. If we ask whether age and
-male are independent in our factor graph, shown in figure~\ref{fig:f1}(c), the graphical test will determine that they are not independent
+male are independent in our factor graph, the graphical test will determine that they are not independent
 since there is a path between them.
 
-It may seem strange that these representations have different lists of conditional independences for the same
+It may seem strange that these representations have different sets of conditional independences for the same
 distribution.
 But, remember how in graphical models some of the conditional independences are determined
 by the graphical structure, and others depend on the parameters (e.g., conditional probability tables of the Bayes net
 or the factors in factor graph).
-So, in our example, by going back and forth between the two representations, we have change the set of 
+So, in our example, by going back and forth between the two representations, we have changed the set of 
 conditional independences that are determined by the graphical model's structure versus the ones that are accidental.
+
 Notice that the factor graph has a smaller set of conditional independences.
 In general, if you take a Bayes net and turn it into a factor graph that represents the same distribution,
 you'll have fewer (non-accidental) conditional independences in the factor graph.
@@ -199,10 +203,11 @@ This means that it's possible to convert among the different representations, an
 Unfortunately, you can lose some information about independences during the conversion process because
 when you make the conversion, independences that were explicit can become accidental.
 Still, there are many cases where being able to convert between these models is advantageous.
-For example,  if you have software that only works for factor graphs but you are given a Bayes net representation that you must work with.
+For example, if you have software that only works for factor graphs but you are given a Bayes net 
+representation, then having the ability to convert between these models would be beneficial.
 
 \begin{figure}[h]
-\caption{Converting Between Bayes Net, Factor Graph, and MRF Representations}
+\caption{Converting between Bayes Net, Factor Graph, and MRF representations}
 \label{fig:f4}
 \centering
 \includegraphics[width=0.6\textwidth]{conv}
@@ -230,8 +235,14 @@ The potential of the particular clique we replaced becomes the potential of the 
 
 \item \textbf{Converting a MRF to a Bayes net} \\
 Converting from a MRF back to a Bayes is the most difficult method out of the four described in this section
-because it requires significantly more computation.
+because it requires more computation.
 There's an expensive way and a cheap way to do this.
+
+\begin{enumerate}
+\item \textit{The expensive way:} \\
+First, we pick a root from the MRF graph and direct the edges away from the root in a way that does not introduce cycles.
+Then we can run Bayes net inference and use the results as our conditional probability table.
+This method is expensive because we must run Bayes inference to find every conditional probability table.
 
 \begin{figure}[h]
 \caption{Converting from MRF back to Bayes net the expensive way}
@@ -240,11 +251,12 @@ There's an expensive way and a cheap way to do this.
 \includegraphics[width=0.6\textwidth]{exp}
 \end{figure}
 
-\begin{enumerate}
-\item \textit{The expensive way:} \\
-First, we pick a root from the MRF graph and direct the edges away from the root in a way that does not introduce cycles.
-Then we can run Bayes net inference and use the results as our conditional probability table.
-This way is expensive because we must run Bayes inference to find every conditional probability table.
+\item \textit{The cheap way}: \\
+To do the cheap conversion, we add an observed common child for each factor.
+There is always a way to set the conditional probability table of $A,B,C$ and to pick an observation for $Z$ 
+(e.g., we can observe Z to be true) such that we can replicate the particular factor.
+A disadvantage of this approach is that adding in extra children increases the size of the graph.
+\end{enumerate}
 
 \begin{figure}[h]
 \caption{Converting from MRF back to Bayes net the cheap way}
@@ -252,13 +264,6 @@ This way is expensive because we must run Bayes inference to find every conditio
 \centering
 \includegraphics[width=0.5\textwidth]{cheap}
 \end{figure}
-
-\item \textit{The cheap way}: \\
-To do the cheap conversion, we add an observed common child for each factor.
-There is always a way to set the conditional probability table of $A,B,C$ and to pick an observation for $Z$ 
-(e.g., we can observe Z to be true) such that we can replicate the particular factor.
-A disadvantage of this approach is that adding in extra children increases the size of the graph.
-\end{enumerate}
 
 \end{enumerate}
 
