@@ -131,19 +131,19 @@
 		$\hat{p}_H=\underset{p_H}{\mathrm{\text{arg max}}}\sum_{i=1}^{N_{bits}}log(p_H(\beta_i-\alpha_i)+\alpha_i)$\\
 		\vspace{0.001em}\\
 		There is no closed-form solution to this equation. We can use iterative convergence methods, like gradient descent, to obtain the MLE. \\
-		\item  Log-likelihood vs $p_H$
+		\item  Log-likelihood vs $p_H$\\
 		\vspace{0.001em}\\
 		\begin{figure}[h]
 		\includegraphics[scale=0.75]{hw2_ques2_2_c}
 		\end{figure}
-		TODOTODOTODOTODOTODO!!!!!!
+		When we increase $\sigma^2$, the noise deviates more from the mean which means we get more bit errors. This causes the curves on the graph to flatten out since other $p_H$s become more likely and the likelihood of $\hat{p}_H$ decreases.
 		\vspace{0.001em}\\
-		\item $\hat{p}_H$, $\bar{p}_H$ vs Trial Size
+		\item $\hat{p}_H$, $\bar{p}_H$ vs Trial Size (see graph 2.2.d)\\
+		
 		\begin{figure}[h]
 		\includegraphics[scale=0.75]{hw2_ques2_2_d}
 		\end{figure}
-		$\bar{p}_H$ is the observed ratio of heads to the total number of flips.  It performs better than $\hat{p}_H$ in the case where our variance is very low (0.1) and constant since a low variance means that noise is going to be very close to 0. As you increase the variance,  $\hat{p}_H$ does better, and converges to $p_H^*$ as the trial size increases.
-		TODOTODOTODOTODOTODO!!!!!!
+		$\bar{p}_H$  is the ratio of the observed number of 1-bits to the total number of bits. As $\sigma^2$ approaches 0, $\hat{p}_H$ is approximately equal to $\bar{p}_H$ because the noise does not deviate far from 0 (the mean) so the bits are unlikely to be corrupted. When the variance is 0.1, $\bar{p}_H$ and $\hat{p}_h$ still perform similarly, however, $\hat{p}_H$ performs slightly better for trial sizes greater than 500 (this can be seen on graph 2.2.d). As we increase $\sigma^2$ further, the accuracy of $\hat{p}_H$ compared with $\bar{p}_H$ increases as well \textit{as long as the trial size is sufficiently large}.
 		\vspace{0.001em}\\
 		\end{enumerate}
 		\item
@@ -152,14 +152,16 @@
 		\vspace{0.001em}\\
 		Where: \hspace{2em}$\alpha_i\sim{}N(O_i;0,\sigma_i^2)$\hspace{2em}$\beta_i\sim{}N(O_i-1;0,\sigma_i^2)$\\
 		\vspace{0.001em}\\
-		Changing the model to include a sigma that grows with consecutive bits is independent of $p_H$ and does not change the first or second derivative with respect to $p_H$. Yhe log-likelihood function is still concave for the same reason as in part 2(a).
+		Changing the model to include a sigma that grows with consecutive bits is independent of $p_H$ and does not change the first or second derivative with respect to $p_H$ (see part 2a). Therefore, the log-likelihood function is still concave.
+		\item Log-likelihood vs $p_H$ (see graph 2.3.b)
 		\begin{figure}[h]
 		\includegraphics[scale=0.75]{hw2_ques2_3_b}
 		\end{figure}
+		\item $\hat{p}_H$, $\bar{p}_H$ vs Trial Size (see graph 2.3.c)\\
+		$\bar{p}_H$ does better until the trial size is at least 500. After this point, $\hat{p}_H$ performs better but also starts moving away from $p_H^*$ as the trial size increases past around 1500.
 		\begin{figure}[h]
 		\includegraphics[scale=0.75]{hw2_ques2_3_c}
 		\end{figure}
-		TODOTODOTODOTODO!!!!!
 		\end{enumerate}
 \end{enumerate}
 

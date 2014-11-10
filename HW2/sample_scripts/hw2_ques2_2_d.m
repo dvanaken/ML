@@ -5,7 +5,7 @@
 clear all;
 
 p_H_star = 0.6; % the value of the true parameter
-sigma_squared = 1;  % the variance of epsilon
+sigma_squared = 10;  % the variance of epsilon
 p_H = 0:0.01:1; % sample p_H
 nPhSamps = length(p_H);
 N_bits = [100 500 1000 2500]; %100 250 500 1000]; % trial size varies
@@ -29,7 +29,8 @@ sigma = sqrt(sigma_squared);
 const = 1 / (sigma * sqrt(2 * pi));
 for i=1:nTrials
     nBits = N_bits(i);
-    samps = (rand(1, nBits) > 0.4) + normrnd(0, sigma, [1 nBits]);
+    %samps = (rand(1, nBits) > 0.4) + normrnd(0, sigma, [1 nBits]);
+    samps = (binornd(1, 0.6, 1, nBits)) + normrnd(0, sigma, [1 nBits]);
     p_H_bar(1,i) = sum(samps > 0.5) / nBits;
     max_LL = -inf;
     max_LL_ind = 1;
