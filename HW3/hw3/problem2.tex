@@ -29,25 +29,6 @@
   \textsc{\large Dana Van Aken} \\
 \end{center}
 
-\section*{Problem 1: Gaussian Processes}
-
-\begin{enumerate}[label=(\alph*)]
-\setlength\itemsep{1em}
-
-\item % (a)
-
-\item % (b)
-
-\item % (c)
-
-\item % (d)
-
-\item % (e)
-
-\item % (f)
-
-\end{enumerate}
-
 \section*{Problem 2: Regression}
 
 \subsection*{2.1 Why Lasso Works}
@@ -94,12 +75,12 @@ Setting the LHS equal to zero and solving for $\beta_i^\ast$ gives:
 
 Calculating the derivative of $f(X_i,y,\beta_i^\ast,\lambda)$, (where $i$ in $\{1...d\}$), we get: 
 
-$\frac{f(X_i,y,\beta_i^\ast,\lambda)}{d\beta_i^\ast}=-\beta_i^\ast-y^TX_i+\lambda$
+$\frac{f(X_i,y,\beta_i^\ast,\lambda)}{d\beta_i^\ast}=\beta_i^\ast-y^TX_i-\lambda$
 
 Setting the LHS equal to zero and solving for $\beta_i^\ast$ gives:
 
 \begin{equation}
-\bm{\beta_i^\ast=-y^TX_i+\lambda}
+\bm{\beta_i^\ast=y^TX_i+\lambda}
 \end{equation}
 
 \item % (4)

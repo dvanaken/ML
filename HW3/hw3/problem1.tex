@@ -34,64 +34,199 @@
 \begin{enumerate}[label=(\alph*)]
 \setlength\itemsep{1em}
 
-\item % (a)
+\item A comparison of covariance functions: see figures~\ref{fig:1a1},~\ref{fig:1a2}, and~\ref{fig:1a3}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_a_1.jpg}
+\caption{Linear Covariance Function}
+\label{fig:1a1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_a_2.jpg}
+\caption{Square Exponential Covariance Function}
+\label{fig:1a2}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_a_3.jpg}
+\caption{Periodic Covariance Function}
+\label{fig:1a3}
+\end{figure}
 
-\item % (b)
+\item Increasing $\sigma^2$ increases the ``noisyness" of the output points, $y_i$.
+Figure~\ref{fig:1b} shows... TODO
 
-\item % (c)
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_b.jpg}
+\caption{Sampling Different Gaussian Noise Parameters Using a Periodic Covariance Function}
+\label{fig:1b}
+\end{figure}
+
+\item Show $p(x_1|x_2)\propto{}p(x_1,x_2)$ \\
+\[
+\begin{bmatrix}
+  x_1 \\ x_2
+\end{bmatrix}
+\sim{}N \Bigg(
+\begin{bmatrix}
+  \mu_1 \\ \mu_2
+\end{bmatrix}
+\begin{bmatrix}
+  \Sigma_{11} & \Sigma{12} \\ \Sigma{21} & \Sigma{22}
+\end{bmatrix}
+\Bigg)
+\]
+
+Let $\Sigma^{-1}=\Lambda^{-1}$ such that
+\[
+\Sigma^{-1}=
+\begin{bmatrix}
+  \Sigma_{11} & \Sigma_{12} \\ \Sigma_{21} & \Sigma_{22}
+\end{bmatrix}
+^{-1}=
+\begin{bmatrix}
+  \Lambda_{11} & \Lambda_{12} \\ \Lambda_{21} & \Lambda_{22}
+\end{bmatrix}
+=\Lambda
+\]
+
+We can focus on the exponent since we want to find $\mu_{x_1|x_2}$ and $\Sigma_{x_1|x_2}$.
+
+%\begin{equation}
+%\begin{align*}
+%-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu) 
+%&=-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu) 
+%\end{align*}
+%\end{equation}
+
+\begin{align*}
+exp&=-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu) \\
+&=-\frac{1}{2}
+\begin{bmatrix}
+  x_1 - \mu_1 \\ x_2 - \mu_2
+\end{bmatrix}
+^T
+\begin{bmatrix}
+  \Sigma_{11} & \Sigma_{12} \\ \Sigma_{21} & \Sigma_{22}
+\end{bmatrix}
+^{-1}
+\begin{bmatrix}
+  x_1 - \mu_1 \\ x_2 - \mu_2
+\end{bmatrix} \\
+&=-\frac{1}{2}
+\begin{bmatrix}
+  x_1 - \mu_1 \\ x_2 - \mu_2
+\end{bmatrix}
+^T
+\begin{bmatrix}
+  \Lambda_{11} & \Lambda_{12} \\ \Lambda_{21} & \Lambda_{22}
+\end{bmatrix}
+\begin{bmatrix}
+  x_1 - \mu_1 \\ x_2 - \mu_2
+\end{bmatrix}
+\end{align*}
+
+\begin{multline*}
+=-\frac{1}{2}(x_1-\mu_1)^T\Lambda_{11}(x_1-\mu_1)
+-\frac{1}{2}(x_1-\mu_1)^T\Lambda_{12}(x_2-\mu_2) \\
+-\frac{1}{2}(x_2-\mu_2)^T\Lambda_{21}(x_1-\mu_1) 
+-\frac{1}{2}(x_2-\mu_2)^T\Lambda_{22}(x_2-\mu_2)
+\end{multline*}
+
+We can call the last term, $-\frac{1}{2}(x_2-\mu_2)^T\Lambda_{22}(x_2-\mu_2)$, $C$ since it does not depend on $x_1$ (constant).
+
+\begin{multline*}
+=-\frac{1}{2}(x_1-\mu_1)^T\Lambda_{11}(x_1-\mu_1)
+-\frac{1}{2}(x_1-\mu_1)^T\Lambda_{12}(x_2-\mu_2)
+-\frac{1}{2}(x_2-\mu_2)^T\Lambda_{21}(x_1-\mu_1) 
++C
+\end{multline*}
+
+\begin{multline*}
+=-\frac{1}{2}x_1^T\Lambda_{11}x_1
++\frac{1}{2}x_1^T\Lambda_{11}\mu_1
++\frac{1}{2}\mu_1^T\Lambda_{11}x_1
+-\frac{1}{2}\mu_1^T\Lambda_{11}\mu_1 \\
+-\frac{1}{2}x_1^T\Lambda_{12}x_2
++\frac{1}{2}x_1^T\Lambda_{12}\mu_2
++\frac{1}{2}\mu_1^T\Lambda_{12}x_2
+-\frac{1}{2}\mu_1^T\Lambda_{12}\mu_2 \\
+-\frac{1}{2}x_2^T\Lambda_{21}x_1
++\frac{1}{2}x_2^T\Lambda_{21}\mu_1
++\frac{1}{2}\mu_2^T\Lambda_{21}x_1
+-\frac{1}{2}\mu_2^T\Lambda_{21}\mu_1+C
+\end{multline*}
+
+Again, include any constants that do not depend on $x_1$ in C.
+
+\begin{multline*}
+=-\frac{1}{2}x_1^T\Lambda_{11}x_1
++\frac{1}{2}x_1^T\Lambda_{11}\mu_1
++\frac{1}{2}\mu_1^T\Lambda_{11}x_1
+-\frac{1}{2}x_1^T\Lambda_{12}x_2
++\frac{1}{2}x_1^T\Lambda_{12}\mu_2
+-\frac{1}{2}x_2^T\Lambda_{21}x_1
++\frac{1}{2}\mu_2^T\Lambda_{21}x_1+C
+\end{multline*}
+
+We can use the fact that $\Lambda_{21}=\Lambda_{12}^T$ to reduce the equation.
+
+\begin{equation*}
+=-\frac{1}{2}x_1^T\Lambda_{11}x_1
++x_1^T\Lambda_{11}\mu_1
+-x_1^T\Lambda_{12}x_2
++x_1^T\Lambda_{12}\mu_2+C
+\end{equation*}
+
+
 
 \item % (d)
 
-\item % (e)
+\item A comparison of covariance functions sampled from $p(f(X)|Y_\ast)$: see figures~\ref{fig:1e1},~\ref{fig:1e2}, and~\ref{fig:1e3}.
 
-\item % (f)
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_e_1.jpg}
+\caption{Linear Covariance Function}
+\label{fig:1e1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_e_2.jpg}
+\caption{Square Exponential Covariance Function}
+\label{fig:1e2}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_e_3.jpg}
+\caption{Periodic Covariance Function}
+\label{fig:1e3}
+\end{figure}
 
-\end{enumerate}
+\item TODO
 
-\section*{Problem 2: Regression}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_f_1.jpg}
+\caption{Sampling Different $\lambda^2$ Parameters Using the Squared Exponential Function}
+\label{fig:1f1}
+\end{figure}
 
-\subsection*{2.1 Why Lasso Works}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_f_2.jpg}
+\caption{Sampling Different $\lambda^2$ Parameters Using the Squared Exponential Function}
+\label{fig:1f2}
+\end{figure}
 
-\begin{enumerate}
-\setlength\itemsep{1em}
-
-\item Write $J_\lambda(\beta)$ in the form $J_\lambda(\beta)=g(y)+\sum_1^df(X_i,y,\beta_i,\lambda)$, $\lambda > 0$: \\
-$J_\lambda(\beta)=\frac{1}{2}\norm{y-X\beta}^2+\lambda\norm{\beta}$ \\
-$=\frac{1}{2}(y-X\beta)^T(y-X\beta)+\lambda\norm{\beta}$ \\
-$=\frac{1}{2}[\norm{y}^2-2y^TX\beta+(X\beta)^TX\beta]+\lambda\norm{\beta}$ \\
-$=\frac{1}{2}[\norm{y}^2-2y^TX\beta+\beta^TX^TX\beta]+\lambda\norm{\beta}$ \\
-$=\frac{1}{2}[\norm{y}^2-2y^TX\beta+\beta^T\beta]+\lambda\norm{\beta}$ \hfill $(X^TX=I)$ \\
-$=\frac{1}{2}\norm{y}^2-y^TX\beta+\frac{1}{2}\norm{\beta}^2+\lambda\norm{\beta}$
-
-\item % (2)
-
-\item % (3)
-
-\item % (4)
-
-\item % (5)
-
-\end{enumerate}
-\subsection*{2.2 Bayesian regression and Gaussian process}
-
-\begin{enumerate}
-\setlength\itemsep{1em}
-
-\item % (1)
-
-\begin{enumerate}
-
-\item % (a)
-
-\item % (b)
-
-\end{enumerate}
-
-\item % (2)
-
-\item % (3)
-
-\item % (4)
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{1_f_3.jpg}
+\caption{Sampling Different $\lambda^2$ Parameters Using the Squared Exponential Function}
+\label{fig:1f3}
+\end{figure}
 
 \end{enumerate}
 \end{document}
