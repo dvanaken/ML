@@ -116,7 +116,26 @@ does not.
 
 \begin{enumerate}
 
-\item % (a)
+\item Derive the posterior distribution:
+\begin{flalign*}
+p(w|Y,X)&=\frac{p(Y|X,w)p(w)}{p(Y|X)} \\
+p(w|Y,X)&\propto{p(Y|X,w)p(w)} &&
+\end{flalign*}
+Find the distributions: \\
+$w\sim{}N(0,\Sigma_p)=N(0,\sigma^2_0I)$ \\
+$\epsilon{}I=Y-f(X)=Y-\Phi^Tw\sim{}N(0,\sigma^2_nI)$ \\
+$Y|X,w\sim{}N(\Phi^Tw,\sigma^2_nI)$ \\
+
+In general, when we multiply 2 Gaussian distributions, we get: \\
+$N(c,C)\propto{}N(a,A)N(b,B)$ \\
+where $C=(A^{-1}+B^{-1})^{-1}$ and $c=CA^{-1}a+CB^{-1}b$
+
+Multiply the distributions:
+\begin{flalign*}
+p(w|Y,X)&\propto{p(Y|X,w)p(w)} \\
+&\propto{}N(\Phi^Tw,\sigma^2_nI)N(0,\sigma^2_0I) \\
+\end{flalign*}
+$w|Y,X\sim{}N(, \frac{1}{\sigma^2_n})$
 
 \item % (b)
 
