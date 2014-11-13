@@ -97,7 +97,7 @@ function Problem1PartA
     legend('s1', 's2', 's3', 'mean');
 
     %% Select 3 different sigmas and sample with 1 covariance function
-    sigmas = [4, 2, 0.5];
+    sigmas = [1, .1, .001];
     Ys = zeros(numGens, lenX);
     
     covv = getPerCov(X, 3);
@@ -113,7 +113,7 @@ function Problem1PartA
     figure
     plot(X, Ys);
     title('Periodic: Sample different noise parameters');
-    legend('sigma^2=16', 'sigma^2=4', 'sigma^2=0.25');
+    legend('sigma^2=1.0', 'sigma^2=0.1', 'sigma^2=0.001');
     xlabel('X');
     ylabel('Y');
 end

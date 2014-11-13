@@ -65,9 +65,9 @@ function Problem1PartB
     %subplot(3, 1, 1);
     plot(X, fxy1);
     hold on;
-    plot(X, mu1, '-.c');
+    plot(X, mu1', '-.c');
     scatter(Xstar, Ystar);
-    pwv = [sdev1(1,:), -sdev1(1,:)];
+    pwv = [(mu1' + sdev1(1,:)), (mu1' -sdev1(1,:))];
     fill(Xx, pwv, 'y', 'FaceAlpha', 0.2, 'EdgeColor', 'none');
     hold off;
     title('Linear Covariance Function');
@@ -79,9 +79,9 @@ function Problem1PartB
     %subplot(3, 1, 2);
     plot(X, fxy2);
     hold on;
-    plot(X, mu2, '-.c');
+    plot(X, mu2', '-.c');
     scatter(Xstar, Ystar);
-    pwv = [sdev2(1,:), -sdev2(1,:)];
+    pwv = [(mu2' + sdev2(1,:)), (mu2' -sdev2(1,:))];
     fill(Xx, pwv, 'y', 'FaceAlpha', 0.2, 'EdgeColor', 'none');
     hold off;
     title('Squared Exponential Covariance Function');
@@ -93,9 +93,9 @@ function Problem1PartB
     %subplot(3, 1, 3);
     plot(X, fxy3);
     hold on;
-    plot(X, mu3, '-.c');
+    plot(X, mu3', '-.c');
     scatter(Xstar, Ystar);
-    pwv = [sdev3(1,:), -sdev3(1,:)];
+    pwv = [(mu3' + sdev3(1,:)), (mu3' -sdev3(1,:))];
     fill(Xx, pwv, 'y', 'FaceAlpha', 0.2, 'EdgeColor', 'none');
     hold off;
     title('Periodic Covariance Function');
@@ -125,7 +125,9 @@ function Problem1PartB
     plot(X, mus(1,:), '-.c');
     scatter(Xstar, Ystar);
     sdev = sqrt(diag(cov11)');
-    pwv = [sdev(1,:), -sdev(1,:)];
+    size(mus(1,:))
+    size(sdev(1,:))
+    pwv = [(mus(1,:) + sdev(1,:)), (mus(1,:) -sdev(1,:))];
     fill(Xx, pwv, 'y', 'FaceAlpha', 0.2, 'EdgeColor', 'none');
     hold off;
     title('Squared Exponential Covariance Function: Lambda^2 = 0.25');
@@ -141,7 +143,7 @@ function Problem1PartB
     plot(X, mus(2,:), '-.c');
     scatter(Xstar, Ystar);
     sdev = sqrt(diag(cov22)');
-    pwv = [sdev(1,:), -sdev(1,:)];
+    pwv = [(mus(2,:)+sdev(1,:)), (mus(2,:)-sdev(1,:))];
     fill(Xx, pwv, 'y', 'FaceAlpha', 0.2, 'EdgeColor', 'none');
     hold off;
     title('Squared Exponential Covariance Function: Lambda^2 = 1');
@@ -156,7 +158,7 @@ function Problem1PartB
     plot(X, mus(3,:), '-.c');
     scatter(Xstar, Ystar);
     sdev = sqrt(diag(cov33)');
-    pwv = [sdev(1,:), -sdev(1,:)];
+    pwv = [(mus(3,:)+sdev(1,:)), (mus(3,:)-sdev(1,:))];
     fill(Xx, pwv, 'y', 'FaceAlpha', 0.2, 'EdgeColor', 'none');
     hold off;
     title('Squared Exponential Covariance Function: Lambda^2 = 16');
