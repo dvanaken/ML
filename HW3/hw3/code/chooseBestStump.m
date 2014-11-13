@@ -37,16 +37,16 @@ function [s, eps] = chooseBestStump( X, Y, D, fs, xs, gains)
     for i=1:2
         length(D)
         for j=1:size(D,1)
-            %Y(j) ~= h(X(j,:),s,o(i))
-            Y(j)
             e(i) = e(i) + D(j)*(Y(j) ~= h(X(j,:),s,o(i)));  
         end
         
     end
     if e(1) <= e(2)
         s.o = o(1);
+        eps = e(1);
     else
         s.o = o(2);
+        eps = e(2);
     end
 end
 
