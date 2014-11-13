@@ -13,5 +13,9 @@ function [ alphas, stumps ] = trainAdaboostModel( X, Y, Tmax )
 
     alphas = zeros(0,1);
     stumps = cell(0,1);
+    
+    for i=1:Tmax
+        
+    end
 end
 
