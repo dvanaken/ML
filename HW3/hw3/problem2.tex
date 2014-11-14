@@ -86,10 +86,11 @@ Setting the LHS equal to zero and solving for $\beta_i^\ast$ gives:
 \item % (4)
 
 In both equations (1) and (2), as we increase $\lambda$, $\beta_i^\ast$ gets closer and closer to zero
-(assuming $\beta_i^\ast$ and $y^TX_i$ are the same sign).
+(this is because $\beta_i^\ast$ and $y^TX_i$ are the same sign since $\lambda > 0$).
 Once you increase $\lambda$ enough that $\beta_i^\ast$ reaches zero, it sticks there because moving it below zero
 increases the L1 penalty and moves it further away from the least squares term (mathematically, $\lambda$ switches
-its sign at this point because of the characteristics of the absolute value function). 
+its sign at this point because of the characteristics of the absolute value function, so if $\beta_i^\ast$ passed 0 then 
+the equation would be inconsistent with the ones we just derived). 
 
 \item % (5)
 
@@ -121,31 +122,60 @@ does not.
 p(w|Y,X)&=\frac{p(Y|X,w)p(w)}{p(Y|X)} \\
 p(w|Y,X)&\propto{p(Y|X,w)p(w)} &&
 \end{flalign*}
-Find the distributions: \\
+Find the distributions of $w$ and $p(Y|X,w)$: \\
 $w\sim{}N(0,\Sigma_p)=N(0,\sigma^2_0I)$ \\
 $\epsilon{}I=Y-f(X)=Y-\Phi^Tw\sim{}N(0,\sigma^2_nI)$ \\
 $Y|X,w\sim{}N(\Phi^Tw,\sigma^2_nI)$ \\
-
-In general, when we multiply 2 Gaussian distributions, we get: \\
-$N(c,C)\propto{}N(a,A)N(b,B)$ \\
-where $C=(A^{-1}+B^{-1})^{-1}$ and $c=CA^{-1}a+CB^{-1}b$
-
+%In general, when we multiply 2 Gaussian distributions, we get: \\
+%$N(c,C)\propto{}N(a,A)N(b,B)$ \\
+%where $C=(A^{-1}+B^{-1})^{-1}$ and $c=CA^{-1}a+CB^{-1}b$
 Multiply the distributions:
 \begin{flalign*}
 p(w|Y,X)&\propto{p(Y|X,w)p(w)} \\
 &\propto{}N(\Phi^Tw,\sigma^2_nI)N(0,\sigma^2_0I) \\
+&\propto{}exp[-\frac{1}{2}(y-\Phi^Tw)^T(\sigma^2_nI)^{-1}(y-\Phi^Tw)]exp[-\frac{1}{2}w^T\Sigma_p^{-1}w] \\
+&\propto{}exp[-\frac{1}{2}(\sigma^{-2}_ny^Ty - \sigma^{-2}_ny^T\Phi^Tw - 
+\sigma^{-2}_nw^T\Phi{}y+\sigma^{-2}_nw^T\Phi{}\Phi^Tw+w^T\Sigma^{-1}_pw)] \\
+&\text{Remove constants that do not depend on w:} \\
+&\propto{}exp[-\frac{1}{2}( - \sigma^{-2}_ny^T\Phi^Tw - 
+\sigma^{-2}_nw^T\Phi{}y+\sigma^{-2}_nw^T\Phi{}\Phi^Tw+w^T\Sigma^{-1}_pw)]  \\
+&\text{Complete the square:} \\
+&\propto{}exp(\frac{-1}{2}(w - (\sigma_n^{-2}\Phi\Phi^T+\Sigma^{-1}_p)^{-1}\Phi{}y)(\sigma^{-2}_n\Phi\Phi^T+\Sigma^{-1}_p)(w - (\sigma_n^{-2}\Phi\Phi^T+\Sigma_p^{-1})^{-1}\Phi{}y)) \\
+&\sim{}N(\sigma_n^{-2}(\sigma_n^{-2}\Phi\Phi^T+\Sigma^{-1}_p)^{-1}\Phi{}y,\; \sigma^{-2}_n\Phi\Phi^T+\Sigma^{-1}_p)
 \end{flalign*}
-$w|Y,X\sim{}N(, \frac{1}{\sigma^2_n})$
 
 \item % (b)
+\begin{flalign*}
+p(f_\ast|X_\ast,X,Y) &= \int{}p(f_\ast|X_\ast,w)p(w|X,Y)dw \\
+&\text{Using Gaussian mean and covariance identities:} \\
+&\sim{}N(\sigma_n^{-2}\Phi_\ast^T(\sigma_n^{-2}\Phi\Phi^T+\Sigma^{-1}_p)^{-1}\Phi{}y,
+\; \Phi_\ast^T(\sigma^{-2}_n\Phi\Phi^T+\Sigma^{-1}_p)\Phi_\ast)
+\end{flalign*}
 
 \end{enumerate}
 
-\item % (2)
+\item Using problem 1.d:
+\begin{flalign*}
+f_\ast|X_\ast,X,Y&\sim{}N(\sigma^2_o\Phi_\ast^T\Phi(\sigma^2_o\Phi^T\Phi+\sigma^2_nI)^{-1}y,\; 
+\sigma_o^2\Phi_\ast^T\Phi_\ast-\sigma_o^2\Phi_\ast\Phi(\sigma^2_o\Phi^T\Phi+\sigma^2_nI)^{-1}\sigma_o^2\Phi^T\Phi_\ast)
+\end{flalign*}
 
-\item % (3)
+\item Show $\sigma_n^{-2}\Phi_\ast^T(\sigma_n^{-2}\Phi\Phi^T+\Sigma^{-1}_p)^{-1}\Phi{}y
+=\sigma^2_o\Phi_\ast^T\Phi(\sigma^2_o\Phi^T\Phi+\sigma^2_nI)^{-1}y$ \\
+Multiply $\sigma_n^{-2}$ and $\sigma_o^2$ through on right and left side: \\
+$\Phi_\ast^T(\Phi\Phi^T+\sigma_n^2\Sigma^{-1}_p)^{-1}\Phi{}y
+=\Phi_\ast^T\Phi(\Phi^T\Phi+\sigma^2_n\Sigma_p^{-1})^{-1}y$ \\
+Multiply both sides through by $y^{-1}$ from the left and $\Phi_\ast^T$ from the right: \\
+$(\Phi\Phi^T+\sigma_n^2\Sigma^{-1}_p)^{-1}\Phi{}=\Phi(\Phi^T\Phi+\sigma^2_n\Sigma_p^{-1})^{-1}$ \\
+Multiply through on each side to get rid of the inverses: \\
+$(\Phi^T\Phi+\sigma^2_n\Sigma_p^{-1})\Phi{}=\Phi(\Phi\Phi^T+\sigma_n^2\Sigma^{-1}_p)$ \\
+Multiply the $\Phi$ on the RHS though and then pull it out on the other side: \\
+$(\Phi^T\Phi+\sigma^2_n\Sigma_p^{-1})\Phi{}=(\Phi^T\Phi+\sigma_n^2\Sigma^{-1}_p)\Phi$ \\
+This shows they are equal.
 
 \item % (4)
-
+To do the prediction, we must invert either an nxn matrix (in equation 1.b) or a DxD matrix (in equation 2) which
+is computationally expensive. For this reason, 
+if $D > n$ then we should use equation 1.b, and if $n > D$ then we should use equation 2.
 \end{enumerate}
 \end{document}

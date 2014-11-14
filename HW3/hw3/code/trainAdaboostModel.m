@@ -11,11 +11,29 @@ function [ alphas, stumps ] = trainAdaboostModel( X, Y, Tmax )
 % Output: alphas, stumps - arrays of size t where t 
 %   is the # of iterations completed before stopping. 
 
-    alphas = zeros(0,1);
-    stumps = cell(0,1);
+    n = size(Y,1); 
+    alphas = zeros(Tmax,1);
+    stumps = cell(Tmax,1);
+    D = ones(n,1);
+    D = (D * 1/n);
+    err = 0.5*10e-10;
     
+    counter = 0;
     for i=1:Tmax
-        
+        % Get stumps
+        [ns, fs, xs, gains] = getWeightedInfoGainForStumps(X,Y,D);
+        [stump, eps] = chooseBestStump(X,Y,D,fs,xs,gains);
+        if eps <=0.5
+            break; 
+        end
+        counter = counter + 1;
+        stumps{i} = stump;
+        alphas(i,1) = computeAlpha(eps);
+        D = computeNewWeights(X,Y,D,alphas(i,1),stump);
     end
+    
+    stumps = stumps{1:counter};
+    alphas = alphas(1:counter);
+    
 end
 
