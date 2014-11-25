@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{multicol}
+\usepackage{paralist}
+\usepackage{todonotes}
+\setlength{\marginparwidth}{2.15cm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\graphicspath{{../}}
+\usepackage{setspace}
+\onehalfspace
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\indep}{\rotatebox[origin=c]{90}{$\models$}}
+
+\begin{document}
+
+\section*{}
+\begin{center}
+  \centerline{\textsc{\LARGE Homework 4}}
+  \vspace{0.5em}
+  \centerline{\textsc{Graphical Models and Learning Theory}}
+  \vspace{1em}
+  \textsc{\large Dana Van Aken} \\
+\end{center}
+
+\section*{Problem 1: Graphical Models and MCMC}
+
+\subsection*{Problem 1.1: A model for diagnosing illness}
+
+\begin{enumerate}[label=(\alph*)]
+\setlength\itemsep{1em}
+
+\item Conditional independence structure questions \\
+Let:
+\begin{itemize}
+\item W = weeks traveling
+\item S = has stomach flu
+\item E = has ebola
+\item R = rash
+\item A = abdominal pain
+
+\end{itemize}
+
+\begin{enumerate}[label=\roman*.]
+
+\item $vars \indep S = \{\}$  (None)
+
+\item $vars \indep S | W,A = \{\}$ (None)
+
+\item $vars \indep R | E = \{A,S,W\}$
+
+\item $S \indep E | A,R$? False.
+
+\end{enumerate}
+
+\item Computing quantities from the model: 
+
+\begin{enumerate}[label=\roman*.]
+
+\item
+
+\end{enumerate}
+
+
+\item
+
+$p(\theta_i|\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n) = $
+$\frac{p(\theta_1, \text{\ldots}, \theta_n)} {\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n}$ \\
+
+$= \frac{1}{Z}\prod_{j=1}^n p(\theta_j|parents(\theta_j))$ 
+\hfill where $Z=\frac{1}{\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n}$\\
+
+We consider: (1) when $\theta_i$ is the child, and (2) when $\theta_i$ is a parent.
+
+$= \frac{1}{Z}p(\theta_i|parents(\theta_i)) \prod_{\theta_k \epsilon \, children{(\theta_i)}}p(\theta_k|parents(\theta_k))$
+
+
+\end{enumerate}
+
+
+
+
+\end{document}
