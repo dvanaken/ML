@@ -4,7 +4,9 @@ function [sample] = sample_discrete(model, var_id)
 % other variable j in the model is 'model{j}.value'.
 
 % TODO: implement me!
-sample = 0;
+var = model{var_id};
+values = var.values;
+sample = randi([1, length(values)]) - 1;
 
 end
 

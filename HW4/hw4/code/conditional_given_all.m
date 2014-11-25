@@ -17,25 +17,37 @@ function [probability] = conditional_given_all(model, var_id)
 %     'model{j}.value'.
 
 % TODO: implement me!
-probability = ones(1, length(model{var_id}.values));
-probability = probability / sum(probability);
+num_values = length(model{var_id}.values);
+probability = ones(1, num_values);
+
 
 var = model{var_id};
-var
-model{1}
 var_parents = conditional_given_parents(model,var_id);
 
-product = 1;
-for i=1:length(var.children)
-    child_id = var.children(i);
-    child = model{child_id};
-    child
-    c_parents = conditional_given_parents(model, child_id);
-    c_prob = c_parents(child.value + 1);
-    product = product * c_prob;
+for i=1:num_values
+    var.value = i - 1;
+    prob = 1;
+    for j=1:length(model)
+        if j ~= var_id
+        node = model{j};
+        n_parents = conditional_given_parents(model, j);
+        prob = prob * n_parents(node.value + 1);
+        end
+    end
+    probability(i) = var_parents(i) * prob;
 end
 
-probability = var_parents .* product;
+% product = 1;
+% for i=1:length(var.children)
+%    child_id = var.children(i);
+%     child = model{child_id};
+%     c_parents = conditional_given_parents(model, child_id);
+%     c_prob = c_parents(child.value + 1);
+%     product = product * c_prob;
+% end
 
+% probability = var_parents .* product;
+probability
+probability = probability / sum(probability);
 end
 
