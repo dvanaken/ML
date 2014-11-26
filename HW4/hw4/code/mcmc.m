@@ -20,8 +20,17 @@ function [model] = mcmc(model, observed_variables, observed_values, iterations)
 [unknown_variables, model] = init_mcmc( ...
     model, observed_variables, observed_values, iterations);
 
+%for i=1:length
+
 for i = 1:iterations
-	% TODO: implement me!
+	perm = randperm(length(unknown_variables));
+    
+    for j=1:length(unknown_variables)
+        id = unknown_variables(perm(j));
+        newval = sample_discrete(model, id);
+        model{id}.samples(i) = newval;
+        model{id}.value = newval;
+    end
 end
 
 end

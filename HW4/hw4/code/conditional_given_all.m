@@ -24,30 +24,33 @@ probability = ones(1, num_values);
 var = model{var_id};
 var_parents = conditional_given_parents(model,var_id);
 
-for i=1:num_values
-    var.value = i - 1;
-    prob = 1;
-    for j=1:length(model)
-        if j ~= var_id
-        node = model{j};
-        n_parents = conditional_given_parents(model, j);
-        prob = prob * n_parents(node.value + 1);
-        end
-    end
-    probability(i) = var_parents(i) * prob;
-end
-
-% product = 1;
-% for i=1:length(var.children)
-%    child_id = var.children(i);
-%     child = model{child_id};
-%     c_parents = conditional_given_parents(model, child_id);
-%     c_prob = c_parents(child.value + 1);
-%     product = product * c_prob;
+% for i=1:num_values
+%     var.value = var.values(i);
+%     prob = 1;
+%     for j=1:length(var.children)
+%         %node = model{j};
+%         child_id = var.children(j);
+%         child = model{child_id};
+%         child_parents = conditional_given_parents(model, child_id);
+%         prob = prob * child_parents(child.value + 1);
+%     end
+%     probability(i) = var_parents(i) * prob;
 % end
 
+for j=1:num_values
+    product = 1;
+    model{var_id}.value = model{var_id}.values(j);
+    for i=1:length(model{var_id}.children)
+       child_id = model{var_id}.children(i);
+        child = model{child_id};
+        c_parents = conditional_given_parents(model, child_id);
+        c_prob = c_parents(child.value + 1);
+        product = product * c_prob;
+    end
+    probability(j) = var_parents(j) * product;
+end
+
 % probability = var_parents .* product;
-probability
 probability = probability / sum(probability);
 end
 
