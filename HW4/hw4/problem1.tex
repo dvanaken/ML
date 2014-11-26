@@ -65,27 +65,465 @@ Let:
 
 \begin{enumerate}[label=\roman*.]
 
+\item 
+\begin{align*}
+p(E|A=t,R=t,W=0) &= \frac{1}{Z_1}\sum_S p(E,S=s,A=t,R=t,W=0) \\
+&= \frac{1}{Z_1}\sum_S p(W=0)p(S=s|W=0)p(E|W=0)p(A=t|S=s,E)p(R=t|E)
+\end{align*}
+
+Eliminate S: (See tables~\ref{table:tbla} and~\ref{table:tblb})
+ 
+\begin{align*}
+&\frac{1}{Z_1}\sum_S p(W=0)p(S=s|W=0)p(E|W=0)p(A=t|S=s,E)p(R=t|E) \\
+&= \frac{1}{Z_1}p(W=0)p(E|W=0)p(R=t|E)\sum_S p(S=s|W=0)p(A=t|S=s,E)
+\end{align*}
+
+*Note $p(W=0)$ is constant so it's combined with the normalizing constant.
+
+\begin{align*}
+&\frac{1}{Z_1}\sum_S p(W=0)p(S=s|W=0)p(E|W=0)p(A=t|S=s,E)p(R=t|E) \\
+&= \frac{1}{Z_1}p(W=0)p(E|W=0)p(R=t|E)\sum_S p(S=s|W=0)p(A=t|S=s,E)
+\end{align*}
+
+
+\begin{align*}
+& \frac{1}{Z_1}p(W=0)p(E|W=0)p(R=t|E)\sum_S p(S=s|W=0)p(A=t|S=s,E) \\
+&= \frac{1}{Z_2}p(E|W=0)p(R=t|E)\sum_S p(S=s|W=0)p(A=t|S=s,E)
+\end{align*}
+
+\begin{table}[h]
+\centering
+\caption{$p(S=s|W=0)$}
+\label{table:tbla}
+\begin{tabular}{|l|l|}
+\hline
+ S & $p(S=s|W=0)$   \\
+\hline \hline
+ F & 0.9  \\
+ T & 0.1  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{$p(A=t|S,E)$}
+\label{table:tblb}
+\begin{tabular}{|l|l|l|}
+\hline
+ S & E & $p(A=t|S,E)$   \\
+\hline \hline
+ F & F & 0.01  \\
+ F & T & 0.95  \\
+ T & F & 0.95  \\
+ T & T & 0.99 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+
+\item \textbf{For E=t:} \\
+$p(E=t|W=0)p(R=t|E=t)*$ \\
+$[p(S=f|W=0)p(A=t|S=f,E=t)+p(S=t|W=0)p(A=t|S=t,E=t)]$ \\
+$=(0.001)(0.9)[(0.9)(0.95)+(0.1)(0.99)]=0.0008586$
+
+\item \textbf{For E=f:} \\
+$p(E=f|W=0)p(R=t|E=f)*$ \\
+$[p(S=f|W=0)p(A=t|S=f,E=f)+p(S=t|W=0)p(A=t|S=t,E=f)]$ \\
+$=(0.999)(0.2)[(0.9)(0.01)+(0.1)(0.95)]=0.0207792$
+
+\item \textbf{Final:}
+
+$p(E=t|A=t,R=t,W=0)=\frac{0.0008586}{0.0008586+0.0207792}=0.0397$ \\
+
+$p(E=f|A=t,R=t,W=0)=\frac{0.0207792}{0.0008586+0.0207792}=0.9603$
+
+\end{itemize}
+
+\item When $W=2$
+
+\begin{itemize}
+
+\item For E=t:
+
+$p(E=t|W=2)p(R=t|E=t)$ \\ $[p(S=f|W=2)p(A=t|S=f,E=t)+p(S=t|W=2)p(A=t|S=t,E=t)]$ \\
+$=(0.04)(0.9)[(0.8)(0.95)+(0.2)(0.99)]=0.034488$
+
+\item For E=f:
+
+$p(E=f|W=2)p(R=t|E=f)$ \\ $[p(S=f|W=2)p(A=t|S=f,E=f)+p(S=t|W=2)p(A=t|S=t,E=f)]$ \\
+$=(0.96)(0.2)[(0.8)(0.01)+(0.2)(0.95)]=0.038016$
+
+\item \textbf{Final:}
+
+$p(E=t|A=t,R=t,W=2)=\frac{0.034488}{0.034488+0.038016}=0.4757$ \\
+$p(E=f|A=t,R=t,W=2)=\frac{0.038016}{0.034488+0.038016}=0.5243$
+
+\end{itemize}
+
 \item
+
+\begin{enumerate}[label=\alph*.]
+
+\item Eliminate A:
+
+\begin{itemize}
+
+\item $P_{initial}=\frac{1}{Z}\sum_{A,S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{ASE}\Phi_{RE}$ 
+$=\frac{1}{Z}\sum_{S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\sum_A\Phi_{ASE}$
+
+\item Tables: $\Phi{ASE}$
+
+\item Message: $\mu_{S,E}$ (See table~\ref{table:tbl1})
+
+\item $P_{final}=\frac{1}{Z}\sum_{A,S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\,\mu_{S,E}$ 
+
+\item \textbf{Note:  $\mu_{S,E}$ is left out of the equation after this since the marginal probability is 1.}
+
+\begin{table}[h]
+\centering
+\caption{$\mu_{S,E}$}
+\label{table:tbl1}
+\begin{tabular}{|l|l|l|}
+\hline
+ S & E & $\mu_{S,E}$   \\
+\hline \hline
+ F & F & 1  \\
+ F & T & 1  \\
+ T & F & 1  \\
+ T & T & 1 \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+\item Eliminate S:
+
+\begin{itemize}
+
+\item $P_{initial}=\frac{1}{Z}\sum_{S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}=$
+$\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$ 
+
+\item Tables: $\Phi_{SW}$
+
+\item Message: $\mu_{W}$ (See table~\ref{table:tbl2})
+
+\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_W$
+
+\item \textbf{Note:  $\mu_{W}$ is left out of the equation after this since the marginal probability is 1.}
+
+\begin{table}[h]
+\centering
+\caption{$\mu_{W}$}
+\label{table:tbl2}
+\begin{tabular}{|l|l|}
+\hline
+ W & $\mu_{W}$   \\
+\hline \hline
+ F & 1  \\
+ T & 1  \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+\item Eliminate E:
+
+\begin{itemize}
+
+\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_W = \frac{1}{Z}\Phi_{W}\sum_{E}\Phi_{EW}\Phi_{RE}$
+
+\item Tables: $\Phi_{EW}\Phi_{RE}$
+
+\item Message: $\mu_{W}$ (See tables~\ref{table:tbl3},~\ref{table:tbl4},~\ref{table:tbl5}) \\
+\textbf{Note:} We can evaluate $R=t$ here since R is observed.
+
+\item  $P_{final}=\frac{1}{Z}\Phi_{W}\,\mu_{W}$
+
+\begin{table}[h]
+\centering
+\caption{Intermediate table (1) - evaluate $p(R=t|E)$}
+\label{table:tbl3}
+\begin{tabular}{|l|l|}
+\hline
+ E & $p(R=t|E)$   \\
+\hline \hline
+ F & 0.2  \\
+ T & 0.9  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Intermediate table (2) - evaluate $\mu_{W,E}$}
+\label{table:tbl4}
+\begin{tabular}{|l|l|l|}
+\hline
+ W &E & $\mu_{W,E}$   \\
+\hline \hline
+0 & F & $0.999*0.2=0.1998$ \\
+0 & T & $0.001*0.9=0.0009$ \\
+1 & F & $0.980*0.2=0.196$ \\
+1 & T & $0.020*0.9=0.018$ \\
+2 & F & $0.960*0.2=0.192$ \\
+2 & T & $0.040*0.9=0.036$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{$\mu_{W}$}
+\label{table:tbl5}
+\begin{tabular}{|l|l|}
+\hline
+ W  & $\mu_{W}$   \\
+\hline \hline
+0 & $0.1998*0.009=0.2088$ \\
+1 & $0.196*0.018=0.214$ \\
+2 & $0.192*0.036=0.228$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+\item Final:
+
+\begin{itemize}
+
+\item Combine tables: $\Phi_W$ and $\mu_W$ (See table~\ref{table:tbl6})
+
+\begin{align*}
+p(W=0|R=t)&=0.19836/0.20934=0.947 \\
+p(W=1|R=t)&=0.00642/0.20934=0.031 \\
+p(W=2|R=t)&=0.00456/0.20934=0.022 \\
+\end{align*}
+
+\begin{table}[h]
+\centering
+\caption{Combine tables $\Phi_W$ and $\mu_W$}
+\label{table:tbl6}
+\begin{tabular}{|l|l|l|l|}
+\hline
+ W  & $\Phi_W$ & $\mu_W$ &  $\Phi_W * \mu_W$ \\
+\hline \hline
+0 & $0.95$ & $0.2088$ &  $0.1936$ \\
+1 & $0.03$ & $0.214$ & $0.00642$  \\
+2 & $0.02$ & $0.228$ & $0.00456$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
 
 \end{enumerate}
 
+\item
+
+\begin{enumerate}[label=\alph*.]
+
+\item Eliminate A:
+
+\begin{itemize}
+
+\item $P_{initial}=\frac{1}{Z}\sum_{A,S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{ASE}\Phi_{RE}$ 
+$=\frac{1}{Z}\sum_{S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\sum_A\Phi_{ASE}$
+
+\item Tables: $\Phi{ASE}$
+
+\item Message: $\mu_{S,E}$ (See table~\ref{table:tbl7})
+
+\item $P_{final}=\frac{1}{Z}\sum_{A,S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\,\mu_{S,E}$ 
+
+\item \textbf{Note:  $\mu_{S,E}$ is left out of the equation after this since the marginal probability is 1.}
+
+\begin{table}[h]
+\centering
+\caption{$\mu_{S,E}$}
+\label{table:tbl10}
+\begin{tabular}{|l|l|l|}
+\hline
+ S & E & $\mu_{S,E}$   \\
+\hline \hline
+ F & F & 1  \\
+ F & T & 1  \\
+ T & F & 1  \\
+ T & T & 1 \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+\item Eliminate S:
+
+\begin{itemize}
+
+\item $P_{initial}=\frac{1}{Z}\sum_{S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}=$
+$\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$ 
+
+\item Tables: $\Phi_{SW}$
+
+\item Message: $\mu_{W}$ (See table~\ref{table:tbl2})
+
+\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_W$
+
+\item \textbf{Note:  $\mu_{W}$ is left out of the equation after this since the marginal probability is 1.}
+
+\begin{table}[h]
+\centering
+\caption{$\mu_{W}$}
+\label{table:tbl11}
+\begin{tabular}{|l|l|}
+\hline
+ W & $\mu_{W}$   \\
+\hline \hline
+ F & 1  \\
+ T & 1  \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+\item Eliminate E:
+
+\begin{itemize}
+
+\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_W = \frac{1}{Z}\Phi_{W}\sum_{E}\Phi_{EW}\Phi_{RE}$
+
+\item Tables: $\Phi_{EW}\Phi_{RE}$
+
+\item Message: $\mu_{W}$ (See tables~\ref{table:tbl3},~\ref{table:tbl4},~\ref{table:tbl5}) \\
+\textbf{Note:} We can evaluate $R=t$ here since R is observed.
+
+\item  $P_{final}=\frac{1}{Z}\Phi_{W}\,\mu_{W}$
+
+\begin{table}[h]
+\centering
+\caption{Intermediate table (1) - evaluate $p(R=f|E)$}
+\label{table:tbl12}
+\begin{tabular}{|l|l|}
+\hline
+ E & $p(R=f|E)$   \\
+\hline \hline
+ F & 0.8  \\
+ T & 0.1  \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Intermediate table (2) - evaluate $\mu_{W,E}$}
+\label{table:tbl13}
+\begin{tabular}{|l|l|l|}
+\hline
+ W &E & $\mu_{W,E}$   \\
+\hline \hline
+0 & F & $0.999*0.8=0.7992$ \\
+0 & T & $0.001*0.1=0.0001$ \\
+1 & F & $0.980*0.8=0.784$ \\
+1 & T & $0.020*0.1=0.002$ \\
+2 & F & $0.960*0.8=0.768$ \\
+2 & T & $0.040*0.1=0.004$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{$\mu_{W}$}
+\label{table:tbl14}
+\begin{tabular}{|l|l|}
+\hline
+ W  & $\mu_{W}$   \\
+\hline \hline
+0 & $0.7992*0.001=0.7993$ \\
+1 & $0.784*0.002=0.786$ \\
+2 & $0.768*0.004=0.772$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{$p(W)*\mu_W$}
+\label{table:tbl15}
+\begin{tabular}{|l|l|l|l|}
+\hline
+ W & $p(W)$  & $\mu_{W}$ & $p(W)*\mu_W$   \\
+\hline \hline
+0 & $0.95$ $0.7993$ $0.75933$  \\
+1 & $0.03$ $0.786$ $0.02358$ \\
+2 & $0.02$ $0.772$ $0.01544$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+\item Final:
+
+\begin{itemize}
+
+\item Combine tables: $\Phi_W$ and $\mu_W$ (See table~\ref{table:tbl6})
+
+\begin{align*}
+p(W=0|R=t)&=0.19836/0.20934=0.947 \\
+p(W=1|R=t)&=0.00642/0.20934=0.031 \\
+p(W=2|R=t)&=0.00456/0.20934=0.022 \\
+\end{align*}
+
+\begin{table}[h]
+\centering
+\caption{Combine tables $\Phi_W$ and $\mu_W$}
+\label{table:tbl6}
+\begin{tabular}{|l|l|l|l|}
+\hline
+ W  & $\Phi_W$ & $\mu_W$ &  $\Phi_W * \mu_W$ \\
+\hline \hline
+0 & $0.95$ & $0.2088$ &  $0.1936$ \\
+1 & $0.03$ & $0.214$ & $0.00642$  \\
+2 & $0.02$ & $0.228$ & $0.00456$ \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+\end{enumerate}
+
+\end{enumerate}
 
 \item
 
-$p(\theta_i|\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n) = $
-$\frac{p(\theta_1, \text{\ldots}, \theta_n)} {\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n}$ \\
+$p(\theta_i|\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n) = $ 
+$\frac{p(\theta_1, \text{\ldots}, \theta_n)} {\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n}$ 
+$= \frac{1}{Z_1}\prod_{j=1}^n p(\theta_j|parents(\theta_j))$ \\
 
-$= \frac{1}{Z}\prod_{j=1}^n p(\theta_j|parents(\theta_j))$ 
-\hfill where $Z=\frac{1}{\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n}$\\
+%\hfill where $Z=\frac{1}{\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n}$\\
 
-We consider: (1) when $\theta_i$ is the child, and (2) when $\theta_i$ is a parent.
+We consider: (1) when $\theta_i$ is the child, and (2) when $\theta_i$ is a parent. \\
 
-$= \frac{1}{Z}p(\theta_i|parents(\theta_i)) \prod_{\theta_k \epsilon \, children{(\theta_i)}}p(\theta_k|parents(\theta_k))$
+$= \frac{1}{Z_2}p(\theta_i|parents(\theta_i)) \prod_{\theta_k \epsilon \, children{(\theta_i)}}p(\theta_k|parents(\theta_k))$
+
 
 
 \end{enumerate}
 
+\subsection*{Problem 1.2: Markov chain Monte Carlo}
 
+\begin{enumerate}[label=(d)]
 
+\item I tested the convergence rate 25 times. The average rate of convergence took 39.6 iterations.
+The range was 32 - 55 iterations.
+
+\end{enumerate}
 
 \end{document}
