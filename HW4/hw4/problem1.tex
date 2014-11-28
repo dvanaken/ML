@@ -559,8 +559,97 @@ $= \frac{1}{Z_2}p(\theta_i|parents(\theta_i)) \prod_{\theta_k \epsilon \, childr
 
 \begin{enumerate}[label=(d)]
 
-\item I tested the convergence rate 10 times. On average, it took 4874 iterations to converge to within 1\% of the
-exact quantities.
+\item 
+For each problem in $b$, I tested the number of iterations it took for the estimates to converge within 1\% of the exact quantities.
+Table~\ref{table:avgs} shows the average number of iterations (out of 5 tests) for each problem in $b$.
+Tables~\ref{table:i},~\ref{table:ii},~\ref{table:iii}, and~\ref{table:iv} show the number of iterations and difference
+for the exact value from 5 tests for each part in $b$. The code can be found in the code directory under script.m
+and mcmc\_test\_convergence.m.
+
+\begin{table}[h]
+\centering
+\caption{Average number of iterations}
+\label{table:avgs}
+\begin{tabular}{|l|l|}
+\hline
+ Problem  & Avg. \# iterations   \\
+\hline \hline
+b.i. & 4694 \\
+b.ii. & 1404 \\
+b.iii. & 2743 \\
+b.vi & 7398 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{b.i. $p(\text{has ebola}|\text{abdominal pain}=T, \text{rash}=T, \text{weeks traveling})=0$}
+\label{table:i}
+\begin{tabular}{|l|l|}
+\hline
+ \# iterations  & error(E=f, E=t)   \\
+\hline \hline
+2311 & (3.3646e-04, 8.1387e-03) \\
+18580 & (4.1329e-04, 9.9969e-03) \\
+1198 & (3.8194e-04, 9.2387e-03) \\
+753 & (1.4645e-04, 3.5425e-03) \\
+629 & (4.7514e-05, 1.1493e-03) \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{b.ii. $p(\text{has ebola}|\text{abdominal pain}=T, \text{rash}=T, \text{weeks traveling}=2)$}
+\label{table:ii}
+\begin{tabular}{|l|l|}
+\hline
+ \# iterations  & error(E=f, E=t)   \\
+\hline \hline
+1930 & (0.0087944, 0.0096928) \\
+1345 & (0.0087686, 0.0096645) \\
+271 & (0.0064377, 0.0070954) \\
+3112 & (0.0089614, 0.0098769) \\
+363 & (0.0069404   0.0076494) \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{b.iii. $p(\text{weeks traveling}|\text{rash}=T)$}
+\label{table:iii}
+\begin{tabular}{|l|l|}
+\hline
+ \# iterations  & error(W=0, W=1, W=2)   \\
+\hline \hline
+2921 & (2.9391e-04, 6.0850e-03, 4.0771e-03) \\
+1597 & (2.3738e-04, 9.9582e-03, 3.8140e-03) \\
+1789 & (4.8224e-04, 8.2764e-03, 9.0960e-03) \\
+4440 & (3.9955e-04, 9.8808e-03, 3.2760e-03) \\
+2971 & (1.9086e-04, 1.0966e-03, 9.7610e-03) \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{b.iv. $p(\text{weeks traveling}|\text{rash}=F)$}
+\label{table:iv}
+\begin{tabular}{|l|l|}
+\hline
+ \# iterations  & error(W=0, W=1, W=2)   \\
+\hline \hline
+7296 & (7.2638e-05, 8.5892e-03, 9.9261e-03) \\
+4246 & (1.3373e-05, 4.8673e-03, 8.3546e-03) \\
+2971 & (5.0293e-04, 9.7610e-03, 9.7610e-03) \\
+1686 & (2.4074e-04, 8.3037e-03, 1.0614e-03) \\
+20793 & (4.1180e-04, 6.7491e-03, 9.9553e-03) \\
+\hline
+\end{tabular}
+\end{table}
+
 
 \end{enumerate}
 
