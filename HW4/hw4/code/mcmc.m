@@ -20,7 +20,11 @@ function [model] = mcmc(model, observed_variables, observed_values, iterations)
 [unknown_variables, model] = init_mcmc( ...
     model, observed_variables, observed_values, iterations);
 
-%for i=1:length
+actual_probs = [.947, .031, .022];
+actual_percentages = actual_probs * 0.01;
+probs = [0,0,0];
+avg = 0;
+bound = 0.01;
 
 for i = 1:iterations
 	perm = randperm(length(unknown_variables));
@@ -31,6 +35,23 @@ for i = 1:iterations
         model{id}.samples(i) = newval;
         model{id}.value = newval;
     end
+    
+    probs(1) = sum(model{1}.samples(1:i) == 0)/i;
+    probs(2) = sum(model{1}.samples(1:i) == 1)/i;
+    probs(3) = sum(model{1}.samples(1:i) == 2)/i;
+    
+    if abs(probs - actual_probs) < actual_percentages
+         %test_runs(j) = i;
+         %avg = avg + i;
+        
+         i
+         break;
+    end
+    if mod(i, 100) == 0
+        i 
+         abs(probs - actual_probs)
+    end
+    
 end
 
 end
