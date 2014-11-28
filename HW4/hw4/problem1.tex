@@ -38,6 +38,8 @@
 \begin{enumerate}[label=(\alph*)]
 \setlength\itemsep{1em}
 
+%%%%%%%%%%%%%%%% Part (a) %%%%%%%%%%%%%%%%%%%%%%
+
 \item Conditional independence structure questions \\
 Let:
 \begin{itemize}
@@ -51,19 +53,31 @@ Let:
 
 \begin{enumerate}[label=\roman*.]
 
+%%%%%% (a) i
+
 \item $vars \indep S = \{\}$  (None)
+
+%%%%%% (a) ii 
 
 \item $vars \indep S | W,A = \{\}$ (None)
 
+%%%%%% (a) iii 
+
 \item $vars \indep R | E = \{A,S,W\}$
+
+%%%%%% (a) iv
 
 \item $S \indep E | A,R$? False.
 
 \end{enumerate}
 
+%%%%%%%%%%%%%%%% PART B %%%%%%%%%%%%%%%%%%%%%%
+
 \item Computing quantities from the model: 
 
 \begin{enumerate}[label=\roman*.]
+
+%%%%%%%%%%%%%%%% (b) i. %%%%%%%%%%%%%%%%%%%%%%
 
 \item 
 \begin{align*}
@@ -141,6 +155,8 @@ $p(E=f|A=t,R=t,W=0)=\frac{0.0207792}{0.0008586+0.0207792}=0.9603$
 
 \end{itemize}
 
+%%%%%%%%%%%%%%%% (b) ii. %%%%%%%%%%%%%%%%%%%%%%
+
 \item When $W=2$
 
 \begin{itemize}
@@ -162,7 +178,18 @@ $p(E=f|A=t,R=t,W=2)=\frac{0.038016}{0.034488+0.038016}=0.5243$
 
 \end{itemize}
 
-\item
+%%%%%%%%%%%%%%%% (b) iii. %%%%%%%%%%%%%%%%%%%%%%
+
+\item $p(W|R=t)=\frac{1}{Z}\sum_{A,S,E}p(W)p(S|W)p(E|W)p(A|S,E)p(R=t|E)$
+
+Let:
+\begin{itemize}
+\item $p(W) = \Phi_W$
+\item$p(S|W)=\Phi_{SW}$
+\item$p(E|W)=\Phi_{EW}$
+\item$p(A|S,E)=\Phi_{ASE}$
+\item$p(R=t|E)=\Phi_{RE}$
+\end{itemize}
 
 \begin{enumerate}[label=\alph*.]
 
@@ -173,11 +200,11 @@ $p(E=f|A=t,R=t,W=2)=\frac{0.038016}{0.034488+0.038016}=0.5243$
 \item $P_{initial}=\frac{1}{Z}\sum_{A,S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{ASE}\Phi_{RE}$ 
 $=\frac{1}{Z}\sum_{S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\sum_A\Phi_{ASE}$
 
-\item Tables: $\Phi{ASE}$
+\item Tables: $\Phi_{ASE}$
 
 \item Message: $\mu_{S,E}$ (See table~\ref{table:tbl1})
 
-\item $P_{final}=\frac{1}{Z}\sum_{A,S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\,\mu_{S,E}$ 
+\item $P_{final}=\frac{1}{Z}\sum_{S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\,\mu_{S,E}$ 
 
 \item \textbf{Note:  $\mu_{S,E}$ is left out of the equation after this since the marginal probability is 1.}
 
@@ -208,19 +235,19 @@ $\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$
 
 \item Tables: $\Phi_{SW}$
 
-\item Message: $\mu_{W}$ (See table~\ref{table:tbl2})
+\item Message: $\mu_{W1}$ (See table~\ref{table:tbl2})
 
-\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_W$
+\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_{W1}$
 
-\item \textbf{Note:  $\mu_{W}$ is left out of the equation after this since the marginal probability is 1.}
+\item \textbf{Note:  $\mu_{W1}$ is left out of the equation after this since the marginal probability is 1.}
 
 \begin{table}[h]
 \centering
-\caption{$\mu_{W}$}
+\caption{$\mu_{W1}$}
 \label{table:tbl2}
 \begin{tabular}{|l|l|}
 \hline
- W & $\mu_{W}$   \\
+ W & $\mu_{W1}$   \\
 \hline \hline
  F & 1  \\
  T & 1  \\
@@ -234,14 +261,14 @@ $\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$
 
 \begin{itemize}
 
-\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_W = \frac{1}{Z}\Phi_{W}\sum_{E}\Phi_{EW}\Phi_{RE}$
+\item $P_{initial}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE} = \frac{1}{Z}\Phi_{W}\sum_{E}\Phi_{EW}\Phi_{RE}$
 
 \item Tables: $\Phi_{EW}\Phi_{RE}$
 
-\item Message: $\mu_{W}$ (See tables~\ref{table:tbl3},~\ref{table:tbl4},~\ref{table:tbl5}) \\
+\item Message: $\mu_{W2}$ (See tables~\ref{table:tbl3},~\ref{table:tbl4},~\ref{table:tbl5}) \\
 \textbf{Note:} We can evaluate $R=t$ here since R is observed.
 
-\item  $P_{final}=\frac{1}{Z}\Phi_{W}\,\mu_{W}$
+\item  $P_{final}=\frac{1}{Z}\Phi_{W}\,\mu_{W2}$
 
 \begin{table}[h]
 \centering
@@ -263,7 +290,7 @@ $\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$
 \label{table:tbl4}
 \begin{tabular}{|l|l|l|}
 \hline
- W &E & $\mu_{W,E}$   \\
+ W &E & $\Phi_{EW}*p(R=t|E)=\mu_{W,E}$   \\
 \hline \hline
 0 & F & $0.999*0.2=0.1998$ \\
 0 & T & $0.001*0.9=0.0009$ \\
@@ -277,40 +304,32 @@ $\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$
 
 \begin{table}[h]
 \centering
-\caption{$\mu_{W}$}
+\caption{$\mu_{W2}$}
 \label{table:tbl5}
 \begin{tabular}{|l|l|}
 \hline
- W  & $\mu_{W}$   \\
+ W  & $\mu_{W2}$   \\
 \hline \hline
-0 & $0.1998*0.009=0.2088$ \\
-1 & $0.196*0.018=0.214$ \\
-2 & $0.192*0.036=0.228$ \\
+0 & $0.1998+0.009=0.2088$ \\
+1 & $0.196+0.018=0.214$ \\
+2 & $0.192+0.036=0.228$ \\
 \hline
 \end{tabular}
 \end{table}
 
 \end{itemize}
 
-\item Final:
+\item\textbf{ Final:}
 
 \begin{itemize}
 
-\item Combine tables: $\Phi_W$ and $\mu_W$ (See table~\ref{table:tbl6})
-
-\begin{align*}
-p(W=0|R=t)&=0.19836/0.20934=0.947 \\
-p(W=1|R=t)&=0.00642/0.20934=0.031 \\
-p(W=2|R=t)&=0.00456/0.20934=0.022 \\
-\end{align*}
-
 \begin{table}[h]
 \centering
-\caption{Combine tables $\Phi_W$ and $\mu_W$}
+\caption{Combine tables $\Phi_W$ and $\mu_{W2}$}
 \label{table:tbl6}
 \begin{tabular}{|l|l|l|l|}
 \hline
- W  & $\Phi_W$ & $\mu_W$ &  $\Phi_W * \mu_W$ \\
+ W  & $\Phi_W$ & $\mu_{W2}$ &  $\Phi_W * \mu_{W2}$ \\
 \hline \hline
 0 & $0.95$ & $0.2088$ &  $0.1936$ \\
 1 & $0.03$ & $0.214$ & $0.00642$  \\
@@ -319,13 +338,36 @@ p(W=2|R=t)&=0.00456/0.20934=0.022 \\
 \end{tabular}
 \end{table}
 
+\item Combine tables: $\Phi_W$ and $\mu_{W2}$ (See table~\ref{table:tbl6})
+
+\item Normalize:
+
+\begin{align*}
+p(W=0|R=t)&=0.19836/0.20934=0.947 \\
+p(W=1|R=t)&=0.00642/0.20934=0.031 \\
+p(W=2|R=t)&=0.00456/0.20934=0.022 \\
+\end{align*}
+
 \end{itemize}
 
 \end{enumerate}
 
-\item
+%%%%%%%%%%%%%%%% (b) iv. %%%%%%%%%%%%%%%%%%%%%%
+
+\item $p(W|R=f)=\frac{1}{Z}\sum_{A,S,E}p(W)p(S|W)p(E|W)p(A|S,E)p(R=f|E)$
+
+Let:
+\begin{itemize}
+\item $p(W) = \Phi_W$
+\item$p(S|W)=\Phi_{SW}$
+\item$p(E|W)=\Phi_{EW}$
+\item$p(A|S,E)=\Phi_{ASE}$
+\item$p(R=t|E)=\Phi_{RE}$
+\end{itemize}
 
 \begin{enumerate}[label=\alph*.]
+
+%%%%%%%% ELIMINATE A
 
 \item Eliminate A:
 
@@ -334,18 +376,18 @@ p(W=2|R=t)&=0.00456/0.20934=0.022 \\
 \item $P_{initial}=\frac{1}{Z}\sum_{A,S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{ASE}\Phi_{RE}$ 
 $=\frac{1}{Z}\sum_{S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\sum_A\Phi_{ASE}$
 
-\item Tables: $\Phi{ASE}$
+\item Tables: $\Phi_{ASE}$
 
-\item Message: $\mu_{S,E}$ (See table~\ref{table:tbl7})
+\item Message: $\mu_{S,E}$ (See table~\ref{table:tbl11})
 
-\item $P_{final}=\frac{1}{Z}\sum_{A,S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\,\mu_{S,E}$ 
+\item $P_{final}=\frac{1}{Z}\sum_{S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\,\mu_{S,E}$ 
 
 \item \textbf{Note:  $\mu_{S,E}$ is left out of the equation after this since the marginal probability is 1.}
 
 \begin{table}[h]
 \centering
 \caption{$\mu_{S,E}$}
-\label{table:tbl10}
+\label{table:tbl11}
 \begin{tabular}{|l|l|l|}
 \hline
  S & E & $\mu_{S,E}$   \\
@@ -360,6 +402,8 @@ $=\frac{1}{Z}\sum_{S,E}\Phi_{W}\Phi_{SW}\Phi_{EW}\Phi_{RE}\sum_A\Phi_{ASE}$
 
 \end{itemize}
 
+%%%%%%%% ELIMINATE S
+
 \item Eliminate S:
 
 \begin{itemize}
@@ -369,19 +413,19 @@ $\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$
 
 \item Tables: $\Phi_{SW}$
 
-\item Message: $\mu_{W}$ (See table~\ref{table:tbl2})
+\item Message: $\mu_{W1}$ (See table~\ref{table:tbl12})
 
-\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_W$
+\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_{W1}$
 
-\item \textbf{Note:  $\mu_{W}$ is left out of the equation after this since the marginal probability is 1.}
+\item \textbf{Note:  $\mu_{W1}$ is left out of the equation after this since the marginal probability is 1.}
 
 \begin{table}[h]
 \centering
-\caption{$\mu_{W}$}
-\label{table:tbl11}
+\caption{$\mu_{W1}$}
+\label{table:tbl12}
 \begin{tabular}{|l|l|}
 \hline
- W & $\mu_{W}$   \\
+ W & $\mu_{W1}$   \\
 \hline \hline
  F & 1  \\
  T & 1  \\
@@ -391,23 +435,25 @@ $\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$
 
 \end{itemize}
 
+%%%%%%%% ELIMINATE E
+
 \item Eliminate E:
 
 \begin{itemize}
 
-\item $P_{final}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\mu_W = \frac{1}{Z}\Phi_{W}\sum_{E}\Phi_{EW}\Phi_{RE}$
+\item $P_{initial}=\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE} = \frac{1}{Z}\Phi_{W}\sum_{E}\Phi_{EW}\Phi_{RE}$
 
 \item Tables: $\Phi_{EW}\Phi_{RE}$
 
-\item Message: $\mu_{W}$ (See tables~\ref{table:tbl3},~\ref{table:tbl4},~\ref{table:tbl5}) \\
+\item Message: $\mu_{W2}$ (See tables~\ref{table:tbl13},~\ref{table:tbl14},~\ref{table:tbl15}) \\
 \textbf{Note:} We can evaluate $R=t$ here since R is observed.
 
-\item  $P_{final}=\frac{1}{Z}\Phi_{W}\,\mu_{W}$
+\item  $P_{final}=\frac{1}{Z}\Phi_{W}\,\mu_{W2}$
 
 \begin{table}[h]
 \centering
 \caption{Intermediate table (1) - evaluate $p(R=f|E)$}
-\label{table:tbl12}
+\label{table:tbl13}
 \begin{tabular}{|l|l|}
 \hline
  E & $p(R=f|E)$   \\
@@ -421,12 +467,12 @@ $\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$
 \begin{table}[h]
 \centering
 \caption{Intermediate table (2) - evaluate $\mu_{W,E}$}
-\label{table:tbl13}
+\label{table:tbl14}
 \begin{tabular}{|l|l|l|}
 \hline
- W &E & $\mu_{W,E}$   \\
+ W &E & $\Phi_{EW}*p(R=f|E)=\mu_{W,E}$   \\
 \hline \hline
-0 & F & $0.999*0.8=0.7992$ \\
+0 & F & $0.999*0.8=0.0.7992$ \\
 0 & T & $0.001*0.1=0.0001$ \\
 1 & F & $0.980*0.8=0.784$ \\
 1 & T & $0.020*0.1=0.002$ \\
@@ -438,30 +484,15 @@ $\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$
 
 \begin{table}[h]
 \centering
-\caption{$\mu_{W}$}
-\label{table:tbl14}
+\caption{$\mu_{W2}$}
+\label{table:tbl15}
 \begin{tabular}{|l|l|}
 \hline
- W  & $\mu_{W}$   \\
+ W  & $\mu_{W2}$   \\
 \hline \hline
-0 & $0.7992*0.001=0.7993$ \\
-1 & $0.784*0.002=0.786$ \\
-2 & $0.768*0.004=0.772$ \\
-\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[h]
-\centering
-\caption{$p(W)*\mu_W$}
-\label{table:tbl15}
-\begin{tabular}{|l|l|l|l|}
-\hline
- W & $p(W)$  & $\mu_{W}$ & $p(W)*\mu_W$   \\
-\hline \hline
-0 & $0.95$ $0.7993$ $0.75933$  \\
-1 & $0.03$ $0.786$ $0.02358$ \\
-2 & $0.02$ $0.772$ $0.01544$ \\
+0 & $0.7992+0.0001=0.7993$ \\
+1 & $0.784+0.002=0.786$ \\
+2 & $0.768+0.004=0.772$ \\
 \hline
 \end{tabular}
 \end{table}
@@ -472,34 +503,38 @@ $\frac{1}{Z}\sum_{E}\Phi_{W}\Phi_{EW}\Phi_{RE}\sum_S\Phi_{SW}$
 
 \begin{itemize}
 
-\item Combine tables: $\Phi_W$ and $\mu_W$ (See table~\ref{table:tbl6})
-
-\begin{align*}
-p(W=0|R=t)&=0.19836/0.20934=0.947 \\
-p(W=1|R=t)&=0.00642/0.20934=0.031 \\
-p(W=2|R=t)&=0.00456/0.20934=0.022 \\
-\end{align*}
+\item Combine tables: $\Phi_W$ and $\mu_{W2}$ (See table~\ref{table:tbl16})
 
 \begin{table}[h]
 \centering
-\caption{Combine tables $\Phi_W$ and $\mu_W$}
-\label{table:tbl6}
+\caption{Combine tables $\Phi_W$ and $\mu_{W2}$}
+\label{table:tbl16}
 \begin{tabular}{|l|l|l|l|}
 \hline
- W  & $\Phi_W$ & $\mu_W$ &  $\Phi_W * \mu_W$ \\
+ W  & $\Phi_W$ & $\mu_{W2}$ &  $\Phi_W * \mu_{W2}$ \\
 \hline \hline
-0 & $0.95$ & $0.2088$ &  $0.1936$ \\
-1 & $0.03$ & $0.214$ & $0.00642$  \\
-2 & $0.02$ & $0.228$ & $0.00456$ \\
+0 & $0.95$ & $0.7993$ &  $0.75933$ \\
+1 & $0.03$ & $0.786$ & $0.02358$  \\
+2 & $0.02$ & $0.772$ & $0.01544$ \\
 \hline
 \end{tabular}
 \end{table}
+
+\begin{align*}
+p(W=0|R=f)&=0.75933/0.79835=0.951 \\
+p(W=1|R=f)&=0.02358/0.79835=0.030 \\
+p(W=2|R=f)&=0.01544/0.79835=0.019 \\
+\end{align*}
+
+$\bm{E[p(W|R=f)]=(0)(0.951)+(1)(0.030)+(2)(.019)=.068}$
 
 \end{itemize}
 
 \end{enumerate}
 
 \end{enumerate}
+
+%%%%%%%%%%%%%%%% Part (c) %%%%%%%%%%%%%%%%%%%%%%
 
 \item
 
@@ -509,7 +544,8 @@ $= \frac{1}{Z_1}\prod_{j=1}^n p(\theta_j|parents(\theta_j))$ \\
 
 %\hfill where $Z=\frac{1}{\theta_1,\text{\ldots},\theta_{i-1},\theta_{i+1},\text{\ldots},\theta_n}$\\
 
-We consider: (1) when $\theta_i$ is the child, and (2) when $\theta_i$ is a parent. \\
+We consider: (1) when $\theta_i$ is the child, (2) when $\theta_i$ is a parent, and 
+(3) the co-parents of $\theta_i$ (included in the term $p(\theta_k|parents(\theta_k)$ shown in the equation below). \\
 
 $= \frac{1}{Z_2}p(\theta_i|parents(\theta_i)) \prod_{\theta_k \epsilon \, children{(\theta_i)}}p(\theta_k|parents(\theta_k))$
 
@@ -519,10 +555,12 @@ $= \frac{1}{Z_2}p(\theta_i|parents(\theta_i)) \prod_{\theta_k \epsilon \, childr
 
 \subsection*{Problem 1.2: Markov chain Monte Carlo}
 
+%%%%%%%%%%%%%%%% Part (d) %%%%%%%%%%%%%%%%%%%%%%
+
 \begin{enumerate}[label=(d)]
 
-\item I tested the convergence rate 25 times. The average rate of convergence took 39.6 iterations.
-The range was 32 - 55 iterations.
+\item I tested the convergence rate 10 times. On average, it took 4874 iterations to converge to within 1\% of the
+exact quantities.
 
 \end{enumerate}
 
